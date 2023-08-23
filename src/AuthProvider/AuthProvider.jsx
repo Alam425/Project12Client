@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import app from "../../fitebase.config";
 
 export const AuthContext = createContext();
@@ -34,6 +34,15 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup( auth, provider )
     }
 
+    const logOut = () => {
+        setLoading(true);
+        signOut(auth).then(() => {
+            console.log("successfully signed out");
+          }).catch((error) => {
+            console.log(error.message);
+          });
+    }
+
     useEffect(()=>{
         const userChange = onAuthStateChanged(auth, currentUser => {
             setLoading(false);
@@ -45,7 +54,7 @@ const AuthProvider = ({ children }) => {
     },[])
 
     const info = {
-        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user
+        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut
     }
 
     return (

@@ -9,6 +9,7 @@ import App from './Home/App';
 import AuthProvider from './AuthProvider/AuthProvider';
 import Login from './login/Login';
 import Register from './Register/Register';
+import Error from './Error/Error';
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,10 @@ const router = createBrowserRouter([
         element: <Register/>
       }
     ]
-  },
+  },{
+    path: "*",
+    element: <Error/>
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
