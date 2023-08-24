@@ -15,14 +15,6 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password)
     }
-//   .then((res) => {
-//     const user = res.user;
-//     })
-//   .catch((error) => {
-//     const errorCode = error.code;
-//     const errorMessage = error.message;
-//     // ..
-//   });
 
     const loginViaEmail = (email, password) => {
         setLoading(true);
@@ -54,7 +46,7 @@ const AuthProvider = ({ children }) => {
     },[])
 
     const info = {
-        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut
+        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth
     }
 
     return (

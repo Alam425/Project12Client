@@ -4,8 +4,8 @@ import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Login = () => {
-    const { loading, loginViaGoogle } = useContext(AuthContext);
     const [see, setSee] = useState(false);
+    const { loginViaGoogle } = useContext(AuthContext);
 
     const googleLogin = () => {
         loginViaGoogle()   
@@ -20,7 +20,7 @@ const Login = () => {
     return (
         <div>
             <div className="hero min-h-screen bg-base-200">
-                <div className="hero-content flex-col lg:flex-row-reverse">
+                <div className="hero-content flex-col lg:flex-row">
                     <div className="text-center lg:text-left">
                         <h1 className="text-5xl font-bold whitespace-nowrap">Login now!</h1>
                     </div>

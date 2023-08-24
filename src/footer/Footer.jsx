@@ -33,7 +33,7 @@ const Footer = () => {
                     <p className="text-xl font- border-b-2 mb-1 text-white">Contact</p><br />
                     <p>Phone: <br /><span className="text-lg font-medium text-amber-400">+8801844727234</span></p>
                     <p>Email: <br /><span className="text-lg font-medium text-amber-400">some@one.com</span></p>
-                    <p>Website: <br /><span className="text-lg font-medium text-amber-400">www.Habi-jabi.bd.com</span></p>
+                    <p>Website: <br /><span className="text-lg font-medium text-amber-400">www.islah.academy.com</span></p>
                 </div>
             </footer>
 
