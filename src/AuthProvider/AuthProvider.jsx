@@ -8,8 +8,13 @@ const provider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
 
-    const [ loading, setLoading ] = useState(true);
-    const [ user, setUser ] = useState(null)
+    const [courseDeatails, setCourseDeatails] = useState('');
+    const [item, setItem] = useState([]);
+    const [specialities, setSpecialities] = useState([]);
+    const [review, setReview] = useState([]);
+    const [instructors, setInstructors] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState(null)
 
     const registerViaEmail = (email, password) => {
         setLoading(true);
@@ -19,34 +24,75 @@ const AuthProvider = ({ children }) => {
     const loginViaEmail = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password)
-    } 
+    }
 
     const loginViaGoogle = () => {
         setLoading(true);
-        return signInWithPopup( auth, provider )
+        return signInWithPopup(auth, provider)
     }
 
     const logOut = () => {
         setLoading(true);
         signOut(auth).then(() => {
             console.log("successfully signed out");
-          }).catch((error) => {
+        }).catch((error) => {
             console.log(error.message);
-          });
+        });
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         const userChange = onAuthStateChanged(auth, currentUser => {
             setLoading(false);
             setUser(currentUser);
         });
-        return ()=>{
+        return () => {
             return userChange;
         }
-    },[])
+    }, [])
+
+    useEffect(() => {
+        fetch("https://assignment12-one.vercel.app/class")
+            .then(res => res.json())
+            .then(data => {
+                setItem(data);
+            })
+    }, [])
+
+    useEffect(() => {
+        fetch("https://assignment12-one.vercel.app/instructor")
+            .then(res => res.json())
+            .then(data => {
+                setInstructors(data);
+            })
+            .catch(e=>{
+                console.log(e.message);
+            })
+    }, [])
+
+    useEffect(() => {
+        fetch("specialities.json")
+            .then(res => res.json())
+            .then(data => {
+                setSpecialities(data);
+            })
+            .catch(e=>{
+                console.log(e.message);
+            })
+    }, [])
+
+    useEffect(() => {
+        fetch("review.json")
+            .then(res => res.json())
+            .then(data => {
+                setReview(data);
+            })
+            .catch(e=>{
+                console.log(e.message);
+            })
+    }, [])
 
     const info = {
-        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth
+        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, specialities, review, courseDeatails, setCourseDeatails
     }
 
     return (

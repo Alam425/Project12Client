@@ -10,6 +10,19 @@ import AuthProvider from './AuthProvider/AuthProvider';
 import Login from './login/Login';
 import Register from './Register/Register';
 import Error from './Error/Error';
+import Fiqh from './navbar/Catagories.jsx/Fiqh';
+import Hadith from './navbar/Catagories.jsx/Hadith';
+import ArabicLanguage from './navbar/Catagories.jsx/ArabicLanguage';
+import SeerahHistory from './navbar/Catagories.jsx/SeerahHistory';
+import MannersEtiquette from './navbar/Catagories.jsx/MannersEtiquette';
+import MarriageFamilyLife from './navbar/Catagories.jsx/MarriageFamilyLife';
+import HomeschoolingParenting from './navbar/Catagories.jsx/HomeschoolingParenting';
+import QuranRecitationTajweed from './navbar/Catagories.jsx/QuranRecitationTajweed';
+import IslamicBelief from './navbar/Catagories.jsx/IslamicBelief';
+import SunnahLifestyle from './navbar/Catagories.jsx/SunnahLifestyle';
+import ProductivityLifeHacks from './navbar/Catagories.jsx/ProductivityLifeHacks';
+import Instructors from './Instructors/Instructors';
+import CourseDetails from './common/CourseDetails';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +35,46 @@ const router = createBrowserRouter([
       },{
         path: 'register',
         element: <Register/>
+      },{
+        path: "Fiqh",
+        element: <Fiqh/>
+      },{
+        path: "Hadith",
+        element: <Hadith/>,
+      },{
+        path: "IslamicBelief",
+        element: <IslamicBelief/>,
+      },{
+        path: "ArabicLanguage",
+        element: <ArabicLanguage/>, 
+      },{
+        path: "Seerah&History",
+        element: <SeerahHistory/>,
+      },{
+        path: "Sunnah&Lifestyle",
+        element: <SunnahLifestyle/>,
+      },{
+        path: "Manners&Etiquette",
+        element: <MannersEtiquette/>,
+      },{
+        path: "Marriage&FamilyLife",
+        element: <MarriageFamilyLife/>,
+      },{
+        path: "Productivity&LifeHacks",
+        element: <ProductivityLifeHacks/>,
+      },{
+        path: "Homeschooling&Parenting",
+        element: <HomeschoolingParenting/>,
+      },{
+        path: "QuranRecitation&Tajweed",
+        element: <QuranRecitationTajweed/>,
+      },{
+        path: "instructors",
+        element: <Instructors></Instructors>
+      },{
+        path: "/details/:_id",
+        element: <CourseDetails/>,
+        loader: () => fetch(`https://assignment12-one.vercel.app/class/${courseDeatails}`)
       }
     ]
   },{
