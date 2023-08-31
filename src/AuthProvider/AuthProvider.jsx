@@ -8,7 +8,6 @@ const provider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
 
-    const [courseDeatails, setCourseDeatails] = useState('');
     const [item, setItem] = useState([]);
     const [specialities, setSpecialities] = useState([]);
     const [review, setReview] = useState([]);
@@ -64,35 +63,26 @@ const AuthProvider = ({ children }) => {
             .then(data => {
                 setInstructors(data);
             })
-            .catch(e=>{
-                console.log(e.message);
-            })
     }, [])
 
     useEffect(() => {
-        fetch("specialities.json")
+        fetch("https://assignment12-one.vercel.app/specialities")
             .then(res => res.json())
             .then(data => {
                 setSpecialities(data);
             })
-            .catch(e=>{
-                console.log(e.message);
-            })
     }, [])
 
     useEffect(() => {
-        fetch("review.json")
+        fetch("https://assignment12-one.vercel.app/reviews")
             .then(res => res.json())
             .then(data => {
                 setReview(data);
             })
-            .catch(e=>{
-                console.log(e.message);
-            })
     }, [])
 
     const info = {
-        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, specialities, review, courseDeatails, setCourseDeatails
+        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, specialities, review
     }
 
     return (

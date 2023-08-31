@@ -72,9 +72,9 @@ const router = createBrowserRouter([
         path: "instructors",
         element: <Instructors></Instructors>
       },{
-        path: "/details/:_id",
+        path: "/class/:_id",
         element: <CourseDetails/>,
-        loader: () => fetch(`https://assignment12-one.vercel.app/class/${courseDeatails}`)
+        loader: ({ params }) => fetch(`http://localhost:3000/class/${params._id}`)
       }
     ]
   },{

@@ -2,10 +2,12 @@ import { useLoaderData } from "react-router-dom";
 
 const CourseDetails = () => {
 
-    const course = useLoaderData();
-console.log(course);
+    const aidee = useLoaderData();
+    console.log(aidee);
+
     return (
         <div>
+           
         </div>
     );
 };

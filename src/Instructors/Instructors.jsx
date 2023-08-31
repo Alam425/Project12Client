@@ -7,19 +7,17 @@ import SectionTitle from "../common/SectionTitle";
 
 const Instructors = () => {
 
+    const [maleInstructors, setMaleInstructors] = useState([]);
+    const [femaleInstructors, setFemaleInstructors] = useState([]);
+
     const { instructors } = useContext(AuthContext);
-    const maleInstructors = instructors.filter(i => i.gender === 'male');
-    const femaleInstructors = instructors.filter(i => i.gender === 'female');
 
-    // const [maleInstructors, setMaleInstructors] = useState([]);
-    // const [femaleInstructors, setFemaleInstructors] = useState([]);
-
-    // useEffect(()=>{
-    //     const maleInstructor = instructors.filter(i => i.gender === 'male');
-    //     setMaleInstructors(maleInstructor);
-    //     const femaleInstructor = instructors.filter(i => i.gender === 'female');
-    //     setFemaleInstructors(femaleInstructor);
-    // },[maleInstructors, femaleInstructors])
+    useEffect(()=>{
+        const maleInstructor = instructors.filter(i => i.gender === 'male');
+        setMaleInstructors(maleInstructor);
+        const femaleInstructor = instructors.filter(i => i.gender === 'female');
+        setFemaleInstructors(femaleInstructor);
+    },[maleInstructors, femaleInstructors])
     
     return (
         <div>
@@ -67,17 +65,17 @@ const Instructors = () => {
                 <SectionTitle down={'Male Instructors'}></SectionTitle>
                 <div>
                     {
-                        // maleInstructors?.map(instructor => <Instructor key={instructor.serial} instructor={instructor}></Instructor>)
+                        maleInstructors?.map(instructor => <Instructor key={instructor.serial} instructor={instructor}></Instructor>)
                     }
                 </div>
             </div>
             <div>
                 <SectionTitle down={'Female Instructors'}></SectionTitle>
-                {/* <div>
+                <div>
                     {
                         femaleInstructors?.map(instructor => <Instructor key={instructor.serial} instructor={instructor}></Instructor>)
                     }
-                </div> */}
+                </div>
             </div>
         </div>
     );
