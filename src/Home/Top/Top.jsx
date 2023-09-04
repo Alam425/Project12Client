@@ -2,7 +2,7 @@
 const Top = () => {
     return (
         <>
-            <div className="md:flex text-center md:text-left mt-16 m-5">
+            <div className="md:flex text-center md:text-left pt-16 m-5">
                 <div className="px-10 w-full">
                     <h2 className="text-4xl my-3 font-semibold text-slate-700">ইসলামী জ্ঞানার্জনের যাত্রা শুরু হোক আজই!</h2>
                     <p className="text-xl text-slate-700">জীবনের অনেক সময়তো পাড়ি দিলাম। আজ যদি মারা যাই, তবে কি কবরের জবাবদিহিতার জন্য প্রস্তুত? জাহান্নাম থেকে বাঁচতে পারব তো? </p>

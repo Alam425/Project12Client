@@ -7,6 +7,7 @@ import Top from './Top/Top';
 import OurSpecialities from './specialities/OurSpecialities';
 import Review from './Review/Review';
 import SpecialBundleCourses from './SpecialBundleCourses/SpecialBundleCourses';
+import PopularInstructors from './PopularInstructors/PopularInstructors';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
       <Top/>
       <Outlet/>
       <SpecialBundleCourses/>
+      <PopularInstructors/>
       <OurSpecialities/>
       <Review/>
       <Footer/>

@@ -7,7 +7,7 @@ const OurSpecialities = () => {
     const { specialities } = useContext(AuthContext);
     return (
         <div>
-            <SectionTitle down={'আসলাফ একাডেমির বিশেষত্ব'}></SectionTitle>
+            <SectionTitle down={'ইসলাহ একাডেমির বিশেষত্ব'}></SectionTitle>
             <div className="grid grid-cols-2 lg:grid-cols-4">
                 {
                     specialities.map(i => <Speciality key={i.serial} i={i}></Speciality>)

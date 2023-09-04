@@ -23,6 +23,7 @@ import SunnahLifestyle from './navbar/Catagories.jsx/SunnahLifestyle';
 import ProductivityLifeHacks from './navbar/Catagories.jsx/ProductivityLifeHacks';
 import Instructors from './Instructors/Instructors';
 import CourseDetails from './common/CourseDetails';
+import Private from './Private/Private';
 
 const router = createBrowserRouter([
   {
@@ -30,12 +31,6 @@ const router = createBrowserRouter([
     element: <App/>,
     children: [
       {
-        path: 'login',
-        element: <Login/>
-      },{
-        path: 'register',
-        element: <Register/>
-      },{
         path: "Fiqh",
         element: <Fiqh/>
       },{
@@ -67,16 +62,22 @@ const router = createBrowserRouter([
         element: <HomeschoolingParenting/>,
       },{
         path: "QuranRecitation&Tajweed",
-        element: <QuranRecitationTajweed/>,
+        element: <Private><QuranRecitationTajweed/></Private>,
       },{
         path: "instructors",
         element: <Instructors></Instructors>
       },{
-        path: "/class/:_id",
+        path: "/tutor/:_id",
         element: <CourseDetails/>,
-        loader: ({ params }) => fetch(`http://localhost:3000/class/${params._id}`)
+        loader: ({ params }) => fetch(`http://localhost:3000/tutor/${params._id}`)
       }
     ]
+  },{
+    path: 'login',
+    element: <Login/>
+  },{
+    path: 'register',
+    element: <Register/>
   },{
     path: "*",
     element: <Error/>

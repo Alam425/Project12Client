@@ -3,6 +3,8 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import Navbar from "../navbar/Navbar";
+import Footer from "../footer/Footer";
 
 const Register = () => {
 
@@ -77,12 +79,12 @@ const Register = () => {
 
     return (
         <div>
-            <div className="hero min-h-screen bg-base-200">
-                <div className="hero-content flex-col md:gap-10 md:flex-row">
-                    <div className="text-center lg:text-left">
-                        <h1 className="text-5xl whitespace-nowrap font-bold">Register now!</h1>
+            <Navbar/>
+                <div className="mt-20 grid grid-cols-1 justify-center items-center sm:grid-cols-2">
+                    <div className="text-center w-full">
+                        <h1 className="text-5xl font-bold whitespace-nowrap">Register now!</h1>
                     </div>
-                    <form onSubmit={formSubmitted} className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                    <form onSubmit={formSubmitted} className="w-full">
                         <div className="card-body pb-0 mb-0">
                             <div className="form-control">
                                 <label className="label">
@@ -140,13 +142,16 @@ const Register = () => {
                         <div className="form-control w-full px-8 pb-8 mt-0">
                             <input type="submit" className="btn btn-primary btn-outline" value="Register" />
                         </div>
-                    <div onClick={googleLogin} className="btn-outline btn btn-success mx-8 mb-8 text-xl">
+                        <div className="mx-8">
+                            
+                    <div onClick={googleLogin} className="btn btn-success mb-8 text-xl w-full">
                             <div><FaGoogle/></div>
                             <div>Login Via Google</div>
                         </div>
+                        </div>
                     </form>
                 </div>
-            </div>
+            <Footer/>
         </div>
     );
 };

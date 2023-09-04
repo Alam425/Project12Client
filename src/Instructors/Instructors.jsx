@@ -1,24 +1,25 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import Instructor from "./Instructor";
-
 import { Link } from "react-router-dom";
 import SectionTitle from "../common/SectionTitle";
 
 const Instructors = () => {
 
+    const { instructors } = useContext(AuthContext); 
+
     const [maleInstructors, setMaleInstructors] = useState([]);
     const [femaleInstructors, setFemaleInstructors] = useState([]);
 
-    const { instructors } = useContext(AuthContext);
-
+    
     useEffect(()=>{
         const maleInstructor = instructors.filter(i => i.gender === 'male');
         setMaleInstructors(maleInstructor);
         const femaleInstructor = instructors.filter(i => i.gender === 'female');
         setFemaleInstructors(femaleInstructor);
-    },[maleInstructors, femaleInstructors])
+    },[  ])
     
+    console.log(instructors.length , maleInstructors.length, femaleInstructors.length);
     return (
         <div>
             <div className="sm:card-side lg:grid lg:grid-cols-4 lg:items-center shadow-xl border-2 border-slate-300 rounded-2xl m-5 p-5">
