@@ -16,7 +16,7 @@ const PopularTutors = ({ i }) => {
                     <div className="w-3/4 mx-auto">
                         <img className="w-96 rounded-xl " src={image} alt={name} />
                     </div>
-                    <div className=" text-slate-700">
+                    <div className=" text-amber-600">
                         {name && <h2 className="text-md font-semibold">Name: <span className="text-md text-red-900 mx-3 text-lg whitespace-nowrap"> {name} </span></h2>}
 
                         {email && <p className="text-md font-semibold">Instructors Email : <span className="text-md text-purple-900 mx-3 text-lg"> {email} </span></p>}

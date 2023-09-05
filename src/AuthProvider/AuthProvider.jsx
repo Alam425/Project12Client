@@ -12,6 +12,8 @@ const AuthProvider = ({ children }) => {
     const [specialities, setSpecialities] = useState([]);
     const [review, setReview] = useState([]);
     const [instructors, setInstructors] = useState([]);
+    const [maleInstructors, setMaleInstructors] = useState([]);
+    const [femaleInstructors, setFemaleInstructors] = useState([]);
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null)
 
@@ -62,6 +64,10 @@ const AuthProvider = ({ children }) => {
             .then(res => res.json())
             .then(data => {
                 setInstructors(data);
+                const maleInstructor = data.filter(i => i.gender === 'male');
+                setMaleInstructors(maleInstructor);
+                const femaleInstructor = data.filter(i => i.gender === 'female');
+                setFemaleInstructors(femaleInstructor);
             })
     }, [])
 
@@ -82,7 +88,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
     const info = {
-        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, specialities, review
+        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, maleInstructors, femaleInstructors, specialities, review
     }
 
     return (

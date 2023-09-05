@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -42,7 +43,7 @@ const Navbar = () => {
           </div>
           <Link to="/" className="btn btn-ghost flex items-center text-xl">
             <div>
-              <img src="../../assets/islamic-school-icon-design-vector_1_100x100.jpg" className="rounded w-10 h-10" alt="ISLAMIC-SCHOOL-ICON-DESIGN-VECTOR"/>
+              <img src="../../assets/islamic-school-icon-design-vector_1_100x100.jpg" className="rounded w-10 h-10" alt="ISLAMIC-SCHOOL-ICON-DESIGN-VECTOR" />
             </div>
             <div>ISLAH ACADEMY</div>
           </Link>
@@ -74,10 +75,13 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           {user ?
-            <div className="btn flex" onClick={signOut}>
-              <div className="tooltip tooltip-bottom" data-tip={user.displayName}>
-                <img src={user.photoURL} className="w-8 rounded h-8" alt={user.displayName}/>
-              </div>LogOut
+            <div className="flex justify-between items-center gap-5">
+            <div className="btn btn-success relative"><FaShoppingCart className="w-7 h-7"/><div className="badge badge-secondary absolute m-0 p-1 -top-1 -right-5">+99</div></div>
+              <div className="btn flex" onClick={signOut}>
+                <div className="tooltip tooltip-bottom" data-tip={user.displayName}>
+                  <img src={user.photoURL} className="w-8 rounded h-8" alt={user.displayName} />
+                </div>LogOut
+              </div>
             </div> :
             <Link to="/login" className="btn">Login</Link>}
         </div>

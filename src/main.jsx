@@ -63,13 +63,6 @@ const router = createBrowserRouter([
       },{
         path: "QuranRecitation&Tajweed",
         element: <Private><QuranRecitationTajweed/></Private>,
-      },{
-        path: "instructors",
-        element: <Instructors></Instructors>
-      },{
-        path: "/tutor/:_id",
-        element: <CourseDetails/>,
-        loader: ({ params }) => fetch(`http://localhost:3000/tutor/${params._id}`)
       }
     ]
   },{
@@ -81,6 +74,13 @@ const router = createBrowserRouter([
   },{
     path: "*",
     element: <Error/>
+  },{
+    path: "/tutor/:_id",
+    element: <CourseDetails/>,
+    loader: ({ params }) => fetch(`http://localhost:3000/tutor/${params._id}`)
+  },{
+    path: "instructors",
+    element: <Instructors></Instructors>
   }
 ]);
 
