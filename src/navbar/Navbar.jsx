@@ -37,8 +37,8 @@ const Navbar = () => {
                   <li><Link to="/QuranRecitation&Tajweed">Quran Recitation & Tajweed</Link></li>
                 </ul>
               </li>
-              <li><Link>Instructors</Link></li>
-              <li><Link>Dashboard</Link></li>
+              <li><Link to="/instructors">Instructors</Link></li>
+              <li><Link to="/dashboard">Dashboard</Link></li>
             </ul>
           </div>
           <Link to="/" className="btn btn-ghost flex items-center text-xl">
@@ -70,7 +70,7 @@ const Navbar = () => {
               </details>
             </li>
             <li><Link to="/instructors">Instructors</Link></li>
-            <li><Link>Dashboard</Link></li>
+            <li><Link to="/dashboard">Dashboard</Link></li>
           </ul>
         </div>
         <div className="navbar-end">

@@ -1,6 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import app from "../../fitebase.config";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -8,6 +10,7 @@ const provider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
 
+    const [cart, setCart] = useState([]);
     const [item, setItem] = useState([]);
     const [specialities, setSpecialities] = useState([]);
     const [review, setReview] = useState([]);
@@ -39,6 +42,26 @@ const AuthProvider = ({ children }) => {
         }).catch((error) => {
             console.log(error.message);
         });
+    }
+    
+    const addToCart = ite => {
+
+        // axios.post('https://assignment12-one.vercel.app/cart', {
+        axios.post('http://localhost:3000/cart', {
+            item : ite
+        })
+          .then(function (response) {
+            console.log(response);
+            setCart(ite);
+            Swal.fire(
+                "Successful",
+                `${ite.name}Added to Cart!`,
+                'success'
+              )
+          })
+          .catch(function (error) {
+            console.log(error.message);
+          });
     }
 
     useEffect(() => {
@@ -88,7 +111,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
     const info = {
-        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, maleInstructors, femaleInstructors, specialities, review
+        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, maleInstructors, femaleInstructors, specialities, review, addToCart, cart
     }
 
     return (

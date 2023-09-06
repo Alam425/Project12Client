@@ -1,12 +1,20 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const AtAGlance = ({ i }) => {
+
+    const {addToCart} = useContext(AuthContext);
 
     const { image, name, price, _id, instructorName, availableSeats } = i;
 
     function showModal() {
         const modalElement = document.getElementById(`${_id}`);
         modalElement.showModal();
+    }
+
+    const addItemToCart = ite => {
+        addToCart(ite);
     }
 
     return (
@@ -44,7 +52,7 @@ const AtAGlance = ({ i }) => {
                                     </div>
 
                                     <div className="modal-action m-0">
-                                        <button className="btn btn-primary btn-outline">Listen</button>
+                                        <button onClick={()=>addItemToCart(i)} className="btn btn-primary btn-outline">Add to Cart</button>
                                         <button className="btn btn-info btn-outline">Close</button>
                                     </div>
                                 </form>

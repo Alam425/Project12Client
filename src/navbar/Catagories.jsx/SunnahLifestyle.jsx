@@ -1,23 +1,11 @@
-import { useContext } from "react";
-import { AuthContext } from "../../AuthProvider/AuthProvider";
-import Card from "../../common/card";
-import SectionTitle from "../../common/SectionTitle";
+import ClassDetails from "../../common/ClassDetails";
 
-const SunnahLifestyle = () => {
-    const {item} = useContext(AuthContext);
-
-    const filterded = item.filter(i => i.category === " Sunnah & Lifestyle ");
-
+const SunnahLifeStyle = () => {
     return (
-        <>
-        <SectionTitle down={" Sunnah & Lifestyle "}></SectionTitle>
         <div>
-            {
-                filterded.map(it => <Card key={it._id} it={it} />)
-            }
+            <ClassDetails categor={" Sunnah & Life Style "}></ClassDetails>            
         </div>
-            </>
     );
 };
 
-export default SunnahLifestyle;
+export default SunnahLifeStyle;

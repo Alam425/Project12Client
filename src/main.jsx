@@ -22,8 +22,9 @@ import IslamicBelief from './navbar/Catagories.jsx/IslamicBelief';
 import SunnahLifestyle from './navbar/Catagories.jsx/SunnahLifestyle';
 import ProductivityLifeHacks from './navbar/Catagories.jsx/ProductivityLifeHacks';
 import Instructors from './Instructors/Instructors';
-import CourseDetails from './common/CourseDetails';
+import InstructorDetails from './common/InstructorDetails';
 import Private from './Private/Private';
+import Dashboard from './Dashboard/Dashboard';
 
 const router = createBrowserRouter([
   {
@@ -72,15 +73,18 @@ const router = createBrowserRouter([
     path: 'register',
     element: <Register/>
   },{
-    path: "*",
-    element: <Error/>
-  },{
     path: "/tutor/:_id",
-    element: <CourseDetails/>,
-    loader: ({ params }) => fetch(`http://localhost:3000/tutor/${params._id}`)
+    element: <InstructorDetails/>,
+    loader: ({ params }) => fetch(`https://assignment12-one.vercel.app/tutor/${params._id}`)
   },{
     path: "instructors",
     element: <Instructors></Instructors>
+  },{
+    path: "dashboard",
+    element: <Dashboard/>
+  },{
+    path: "*",
+    element: <Error/>
   }
 ]);
 
