@@ -1,14 +1,27 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { FaShoppingCart } from "react-icons/fa";
+import axios from "axios";
 
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut, setCart, Cart } = useContext(AuthContext);
 
   const signOut = () => {
     logOut();
   };
+
+  useEffect(() => {
+    // axios.get('https://assignment12-one.vercel.app/cart')
+    axios.get('http://localhost:3000/cart')
+    .then(function (response) {
+      setCart(response.data);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error.message);
+    })
+  }, [])
 
   return (
     <div className="relative">
@@ -37,8 +50,8 @@ const Navbar = () => {
                   <li><Link to="/QuranRecitation&Tajweed">Quran Recitation & Tajweed</Link></li>
                 </ul>
               </li>
-              <li><Link to="/instructors">Instructors</Link></li>
-              <li><Link to="/dashboard">Dashboard</Link></li>
+              <li><Link to="/page/instructors">Instructors</Link></li>
+              <li><Link to="/page/dashboard">Dashboard</Link></li>
             </ul>
           </div>
           <Link to="/" className="btn btn-ghost flex items-center text-xl">
@@ -69,21 +82,21 @@ const Navbar = () => {
                 </ul>
               </details>
             </li>
-            <li><Link to="/instructors">Instructors</Link></li>
-            <li><Link to="/dashboard">Dashboard</Link></li>
+            <li><Link to="/page/instructors">Instructors</Link></li>
+            <li><Link to="/page/dashboard">Dashboard</Link></li>
           </ul>
         </div>
         <div className="navbar-end">
           {user ?
             <div className="flex justify-between items-center gap-5">
-            <div className="btn btn-success relative"><FaShoppingCart className="w-7 h-7"/><div className="badge badge-secondary absolute m-0 p-1 -top-1 -right-5">+99</div></div>
+              <div className="border-4 border-white btn btn-success relative"><FaShoppingCart className="w-7 h-7" /><div className="badge badge-primary absolute m-0 p-1 -top-3 -right-2">{Cart.length}</div></div>
               <div className="btn flex" onClick={signOut}>
                 <div className="tooltip tooltip-bottom" data-tip={user.displayName}>
                   <img src={user.photoURL} className="w-8 rounded h-8" alt={user.displayName} />
                 </div>LogOut
               </div>
             </div> :
-            <Link to="/login" className="btn">Login</Link>}
+            <Link to="/page/login" className="btn">Login</Link>}
         </div>
       </div>
     </div>
