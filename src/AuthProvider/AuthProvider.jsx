@@ -45,12 +45,8 @@ const AuthProvider = ({ children }) => {
     }
 
     const addToCart = ite => {
-<<<<<<< HEAD
-        axios.post('https://assignment12-one.vercel.app/cart', {
-=======
         // axios.post('https://assignment12-one.vercel.app/cart', {
         axios.post('http://localhost:3000/cart', {
->>>>>>> 529b5f2f5c0594a93175e86c671b626e10a353b7
             item: ite
         })
             .then(function (response) {
