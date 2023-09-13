@@ -45,8 +45,8 @@ const AuthProvider = ({ children }) => {
     }
 
     const addToCart = ite => {
-        // axios.post('https://assignment12-one.vercel.app/cart', {
-        axios.post('http://localhost:3000/cart', {
+        axios.post('https://assignment12-fz53fo930-alam425.vercel.app/cart', {
+        // axios.post('http://localhost:3000/cart', {
             item: ite
         })
             .then(function (response) {
@@ -57,6 +57,21 @@ const AuthProvider = ({ children }) => {
                         `${ite.name}Added to Cart!`,
                         'success'
                     )
+                }
+            })
+            .catch(function (error) {
+                console.log(error.message);
+            });
+    }
+
+    const addUserToMongo = user => {
+        axios.post('https://assignment12-fz53fo930-alam425.vercel.app/users', {
+        // axios.post('http://localhost:3000/users', {
+            user: user
+        })
+            .then(function (response) {
+                if (response.data.insertedId) {
+                    console.log(response.data);
                 }
             })
             .catch(function (error) {
@@ -75,7 +90,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
     useEffect(() => {
-        fetch("https://assignment12-one.vercel.app/class")
+        fetch("https://assignment12-fz53fo930-alam425.vercel.app/class")
             .then(res => res.json())
             .then(data => {
                 setItem(data);
@@ -83,7 +98,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
     useEffect(() => {
-        fetch("https://assignment12-one.vercel.app/instructor")
+        fetch("https://assignment12-fz53fo930-alam425.vercel.app/instructor")
             .then(res => res.json())
             .then(data => {
                 setInstructors(data);
@@ -95,7 +110,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
     useEffect(() => {
-        fetch("https://assignment12-one.vercel.app/specialities")
+        fetch("https://assignment12-fz53fo930-alam425.vercel.app/specialities")
             .then(res => res.json())
             .then(data => {
                 setSpecialities(data);
@@ -103,7 +118,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
     useEffect(() => {
-        fetch("https://assignment12-one.vercel.app/reviews")
+        fetch("https://assignment12-fz53fo930-alam425.vercel.app/reviews")
             .then(res => res.json())
             .then(data => {
                 setReview(data);
@@ -111,7 +126,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
     const info = {
-        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, maleInstructors, femaleInstructors, specialities, review, addToCart, setCart, Cart
+        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, maleInstructors, femaleInstructors, specialities, review, addToCart, setCart, Cart, addUserToMongo
     }
 
     return (

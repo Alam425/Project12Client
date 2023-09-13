@@ -66,7 +66,7 @@ const Login = () => {
                                 </div>
                             </div>
                             <label className="label">
-                                <p className="font-semibold text-slate-700">New here? <Link className="text-lg underline" to='/register'>Register Now.</Link></p>
+                                <p className="font-semibold text-slate-700">New here? <Link className="text-lg underline" to='/page/register'>Register Now.</Link></p>
                             </label>
                         </div>
                     </div>

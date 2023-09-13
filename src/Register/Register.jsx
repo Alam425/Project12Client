@@ -7,7 +7,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 const Register = () => {
 
     const navigate = useNavigate();
-    const { auth, loginViaGoogle } = useContext(AuthContext);
+    const { auth, loginViaGoogle, addUserToMongo } = useContext(AuthContext);
     const [see, setSee] = useState(false);
     const [se, setSe] = useState(false);
     const [error, setError] = useState("");
@@ -19,7 +19,7 @@ const Register = () => {
         loginViaGoogle()
             .then((result) => {
                 const user = result.user;
-                console.log(user);
+                addUserToMongo(user);
             }).catch((error) => {
                 console.log(error.message);
             });
@@ -64,7 +64,7 @@ const Register = () => {
                 }
                 )
                     .then(() => {
-                        console.log(result?.user);
+                        addUserToMongo(result.user);
                     })
                     .catch((error) => {
                         console.log(error.message);
@@ -122,7 +122,7 @@ const Register = () => {
                             </label>
                             <div className="relative">
                                 <div>
-                                    <input required className="input input-bordered w-full" type={see ? 'text' : 'password'} name="confirmPassword" id="" />
+                                    <input required className="input input-bordered w-full" type={se ? 'text' : 'password'} name="confirmPassword" id="" />
                                 </div>
                                 <div className="text-xl absolute top-4 right-5" onClick={() => setSe(!se)}>
                                     {

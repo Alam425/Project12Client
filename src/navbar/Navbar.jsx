@@ -12,8 +12,8 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    // axios.get('https://assignment12-one.vercel.app/cart')
-    axios.get('http://localhost:3000/cart')
+    axios.get('https://assignment12-fz53fo930-alam425.vercel.app/cart')
+    // axios.get('http://localhost:3000/cart')
     .then(function (response) {
       setCart(response.data);
     })
