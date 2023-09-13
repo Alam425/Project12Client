@@ -13,7 +13,7 @@ const Footer = () => {
                     <Link to='/' className="text-lg text-white">Affiliate Zone</Link><br />
                     <Link to='/' className="text-lg text-white">Privacy Policy</Link><br />
                 </div>
-
+{/* footer */}
                 <div className="md:col-span-2 m-5 my-10">
                     <p className="text-xl font-medium text-white">ISLAH ACADEMY is the leading eLearning platform for Islamic Online Courses in Bangladesh. Our online courses are designed in collaboration with the best Islamic scholars and experts of each field from all over the world.</p><br />
                     <div className="flex gap-5 items-center mt-0 justify-items-center text-slate-100">

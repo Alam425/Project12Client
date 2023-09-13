@@ -10,7 +10,7 @@ const provider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
 
-    const [cart, setCart] = useState([]);
+    const [Cart, setCart] = useState([]);
     const [item, setItem] = useState([]);
     const [specialities, setSpecialities] = useState([]);
     const [review, setReview] = useState([]);
@@ -18,7 +18,7 @@ const AuthProvider = ({ children }) => {
     const [maleInstructors, setMaleInstructors] = useState([]);
     const [femaleInstructors, setFemaleInstructors] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState(null);
 
     const registerViaEmail = (email, password) => {
         setLoading(true);
@@ -43,25 +43,24 @@ const AuthProvider = ({ children }) => {
             console.log(error.message);
         });
     }
-    
-    const addToCart = ite => {
 
-        // axios.post('https://assignment12-one.vercel.app/cart', {
-        axios.post('http://localhost:3000/cart', {
-            item : ite
+    const addToCart = ite => {
+        axios.post('https://assignment12-one.vercel.app/cart', {
+            item: ite
         })
-          .then(function (response) {
-            console.log(response);
-            setCart(ite);
-            Swal.fire(
-                "Successful",
-                `${ite.name}Added to Cart!`,
-                'success'
-              )
-          })
-          .catch(function (error) {
-            console.log(error.message);
-          });
+            .then(function (response) {
+                if (response.data.insertedId) {
+                    console.log(response.data);
+                    Swal.fire(
+                        "Successful",
+                        `${ite.name}Added to Cart!`,
+                        'success'
+                    )
+                }
+            })
+            .catch(function (error) {
+                console.log(error.message);
+            });
     }
 
     useEffect(() => {
@@ -111,7 +110,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
     const info = {
-        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, maleInstructors, femaleInstructors, specialities, review, addToCart, cart
+        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, maleInstructors, femaleInstructors, specialities, review, addToCart, setCart, Cart
     }
 
     return (

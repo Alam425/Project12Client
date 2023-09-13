@@ -25,66 +25,71 @@ import Instructors from './Instructors/Instructors';
 import InstructorDetails from './common/InstructorDetails';
 import Private from './Private/Private';
 import Dashboard from './Dashboard/Dashboard';
+import Page from './Page/Page';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
+    element: <App />,
     children: [
       {
         path: "Fiqh",
-        element: <Fiqh/>
-      },{
+        element: <Fiqh />
+      }, {
         path: "Hadith",
-        element: <Hadith/>,
-      },{
+        element: <Hadith />,
+      }, {
         path: "IslamicBelief",
-        element: <IslamicBelief/>,
-      },{
+        element: <IslamicBelief />,
+      }, {
         path: "ArabicLanguage",
-        element: <ArabicLanguage/>, 
-      },{
+        element: <ArabicLanguage />,
+      }, {
         path: "Seerah&History",
-        element: <SeerahHistory/>,
-      },{
+        element: <SeerahHistory />,
+      }, {
         path: "Sunnah&Lifestyle",
-        element: <SunnahLifestyle/>,
-      },{
+        element: <SunnahLifestyle />,
+      }, {
         path: "Manners&Etiquette",
-        element: <MannersEtiquette/>,
-      },{
+        element: <MannersEtiquette />,
+      }, {
         path: "Marriage&FamilyLife",
-        element: <MarriageFamilyLife/>,
-      },{
+        element: <MarriageFamilyLife />,
+      }, {
         path: "Productivity&LifeHacks",
-        element: <ProductivityLifeHacks/>,
-      },{
+        element: <ProductivityLifeHacks />,
+      }, {
         path: "Homeschooling&Parenting",
-        element: <HomeschoolingParenting/>,
-      },{
+        element: <HomeschoolingParenting />,
+      }, {
         path: "QuranRecitation&Tajweed",
-        element: <Private><QuranRecitationTajweed/></Private>,
+        element: <Private><QuranRecitationTajweed /></Private>,
       }
     ]
-  },{
-    path: 'login',
-    element: <Login/>
-  },{
-    path: 'register',
-    element: <Register/>
-  },{
-    path: "/tutor/:_id",
-    element: <InstructorDetails/>,
-    loader: ({ params }) => fetch(`https://assignment12-one.vercel.app/tutor/${params._id}`)
-  },{
-    path: "instructors",
-    element: <Instructors></Instructors>
-  },{
-    path: "dashboard",
-    element: <Dashboard/>
-  },{
+  }, {
+    path: '/page',
+    element: <Page />,
+    children: [{
+      path: '/page/login',
+      element: <Login />
+    }, {
+      path: '/page/register',
+      element: <Register />
+    }, {
+      path: "/page/tutor/:_id",
+      element: <InstructorDetails />,
+      loader: ({ params }) => fetch(`https://assignment12-one.vercel.app/tutor/${params._id}`)
+    }, {
+      path: "/page/instructors",
+      element: <Instructors></Instructors>
+    }, {
+      path: "/page/dashboard",
+      element: <Dashboard />
+    }]
+  }, {
     path: "*",
-    element: <Error/>
+    element: <Error />
   }
 ]);
 

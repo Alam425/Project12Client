@@ -3,7 +3,7 @@ import ClassesName from "../Instructors/ClassesName";
 
 
 const Instructor = ({ i }) => {
-    console.log(i.serial);
+    console.log(i);
 
     const [claas, setClaas] = useState(false);
     const { email, image, name, nameOfClassesTaken, numberOfClassesTaken } = i;

@@ -3,16 +3,13 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 import { Link } from "react-router-dom";
 import SectionTitle from "../common/SectionTitle";
 import Instructor from "../common/Instructor";
-import Navbar from "../navbar/Navbar";
-import Footer from "../footer/Footer";
 
 const Instructors = () => {
 
     const { instructors } = useContext(AuthContext);
-console.log(instructors);
+    console.log(instructors);
     return (
         <div>
-            <Navbar />
             <div className="mt-20">
                 <div className="sm:card-side lg:grid lg:grid-cols-4 lg:items-center shadow-xl border-2 border-slate-300 rounded-2xl m-5 p-5">
                     <figure>
@@ -66,12 +63,11 @@ console.log(instructors);
                     <SectionTitle down={'Female Instructors'}></SectionTitle>
                     <div>
                         {
-                            // femaleInstructors?.map(i => <Instructor key={i.serial} i={i}></Instructor>)
+                            instructors.filter(i => i.gender === "female")?.map(i => <Instructor key={i.serial} i={i}></Instructor>)
                         }
                     </div>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 };
