@@ -17,7 +17,7 @@ const InstructorDetails = () => {
           </div>
         </div>
         <div className="p-5 text-center border-b-4">
-          <p className="md:text-4xl text-3xl p-2 text-emerald-700 font-bold border-y-4">{numberOfClassesTaken} Classes Taken by<br /><span className="text-sky-800">{name}</span></p>
+          <p className="md:text-4xl text-3xl p-2 text-emerald-700 font-bold border-y-4">{numberOfClassesTaken} Classes fromgiy<br /><span className="text-sky-800">{name}</span></p>
           <div className="text-xl mt-5 sm:mt-10 text-fuchsia-800 font-semibold border-x-4">
             {
               nameOfClassesTaken.map(i => <ClassesList key={serial} i={i}></ClassesList>)

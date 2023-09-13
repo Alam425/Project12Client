@@ -50,7 +50,7 @@ const AtAGlance = ({ i }) => {
                                         <div className="md:justify-end card-actions">
                                         </div>
                                     </div>
-
+{/* emnei likhsi, hudai............ */}
                                     <div className="modal-action m-0">
                                         <button onClick={()=>addItemToCart(i)} className="btn btn-primary btn-outline">Add to Cart</button>
                                         <button className="btn btn-info btn-outline">Close</button>

@@ -26,7 +26,7 @@ const PopularTutors = ({ i }) => {
                         }
 
                         {nameOfClassesTaken &&
-                            <Link to={`/tutor/${_id}`}>
+                            <Link to={`/page/tutor/${_id}`}>
                                 <div className="underline text-rose-600 font-semibold text-lg whitespace-nowrap" >
                                     See Classes Taken by The Tutor
                                 </div>

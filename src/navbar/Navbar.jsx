@@ -12,13 +12,22 @@ const Navbar = () => {
   };
 
   useEffect(() => {
+<<<<<<< HEAD
     axios.get('https://assignment12-one.vercel.app/cart')
+=======
+    // axios.get('https://assignment12-one.vercel.app/cart')
+    axios.get('http://localhost:3000/cart')
+>>>>>>> 529b5f2f5c0594a93175e86c671b626e10a353b7
     .then(function (response) {
       setCart(response.data);
     })
     .catch(function (error) {
       // handle error
+<<<<<<< HEAD
       console.log(error);
+=======
+      console.log(error.message);
+>>>>>>> 529b5f2f5c0594a93175e86c671b626e10a353b7
     })
   }, [])
 
