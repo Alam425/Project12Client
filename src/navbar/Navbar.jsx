@@ -55,7 +55,7 @@ const Navbar = () => {
           </div>
           <Link to="/" className="btn btn-ghost flex items-center text-xl">
             <div>
-              <img src="../../assets/islamic-school-icon-design-vector_1_100x100.jpg" className="rounded w-10 h-10" alt="ISLAMIC-SCHOOL-ICON-DESIGN-VECTOR" />
+              <img src="https://i.ibb.co/zGW3dbW/islamic-school-icon-design-vector-1-100x100.jpg" className="rounded w-10 h-10" alt="ISLAMIC-SCHOOL-ICON-DESIGN-VECTOR" />
             </div>
             <div>ISLAH ACADEMY</div>
           </Link>

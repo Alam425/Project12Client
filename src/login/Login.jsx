@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Login = () => {
     const [see, setSee] = useState(false);
@@ -18,8 +19,15 @@ const Login = () => {
         loginViaEmail(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
                 navigate(from, { replace: true });
+                if (result) {
+                    Swal.fire({
+                        position: 'top',
+                        icon: 'success',
+                        title: `Welcome ${user?.displayName}!`,
+                        showConfirmButton: false,
+                        timer: 2000
+                    })}
             })
             .catch(e => {
                 console.log(e.message);
@@ -30,8 +38,15 @@ const Login = () => {
         loginViaGoogle()
             .then((result) => {
                 const user = result.user;
-                console.log(user);
                 navigate(from, { replace: true });
+                if (result) {
+                    Swal.fire({
+                        position: 'top',
+                        icon: 'success',
+                        title: `Welcome ${user?.displayName}!`,
+                        showConfirmButton: false,
+                        timer: 2000
+                    })}
             }).catch((error) => {
                 console.log(error.message);
             });

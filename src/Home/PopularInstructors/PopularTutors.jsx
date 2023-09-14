@@ -22,13 +22,13 @@ const PopularTutors = ({ i }) => {
                         {email && <p className="text-md font-semibold">Instructors Email : <span className="text-md text-purple-900 mx-3 text-lg"> {email} </span></p>}
 
                         {numberOfClassesTaken && 
-                        <p className="text-md font-semibold">Number of Classes Taken : <span className="text-cyan-700 text-xl"> {numberOfClassesTaken} </span></p>
+                        <p className="text-md font-semibold whitespace-nowrap">Number of Classes Taken : <span className="text-cyan-700 text-xl"> {numberOfClassesTaken} </span></p>
                         }
 
                         {nameOfClassesTaken &&
                             <Link to={`/page/tutor/${_id}`}>
-                                <div className="underline text-rose-600 font-semibold text-lg whitespace-nowrap" >
-                                    See Classes Taken by The Tutor
+                                <div className="underline text-rose-600 font-semibold text-lg" >
+                                    Checkout Classes
                                 </div>
                             </Link>
                         }

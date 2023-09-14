@@ -7,7 +7,7 @@ import Instructor from "../common/Instructor";
 const Instructors = () => {
 
     const { instructors } = useContext(AuthContext);
-    console.log(instructors);
+    
     return (
         <div>
             <div className="mt-20">
@@ -53,15 +53,15 @@ const Instructors = () => {
                 </div>
                 <div>
                     <SectionTitle down={'Male Instructors'}></SectionTitle>
-                    <div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                         {
-                            instructors.filter(i => i.gender === "male")?.map(i => <Instructor key={i.serial} i={i}></Instructor>)
+                            instructors.filter(i => i.gender === "male").map(i => <Instructor key={i.serial} i={i}></Instructor>)
                         }
                     </div>
                 </div>
                 <div>
                     <SectionTitle down={'Female Instructors'}></SectionTitle>
-                    <div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                         {
                             instructors.filter(i => i.gender === "female")?.map(i => <Instructor key={i.serial} i={i}></Instructor>)
                         }

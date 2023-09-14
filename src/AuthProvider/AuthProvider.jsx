@@ -14,9 +14,8 @@ const AuthProvider = ({ children }) => {
     const [item, setItem] = useState([]);
     const [specialities, setSpecialities] = useState([]);
     const [review, setReview] = useState([]);
+    const [allusers, setAllusers] = useState([]);
     const [instructors, setInstructors] = useState([]);
-    const [maleInstructors, setMaleInstructors] = useState([]);
-    const [femaleInstructors, setFemaleInstructors] = useState([]);
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
 
@@ -45,13 +44,21 @@ const AuthProvider = ({ children }) => {
     }
 
     const addToCart = ite => {
-        axios.post('https://assignment12-fz53fo930-alam425.vercel.app/cart', {
-        // axios.post('http://localhost:3000/cart', {
+        // axios.post('https://assignment12-fz53fo930-alam425.vercel.app/cart', {
+        axios.post('http://localhost:3000/cart', {
             item: ite
         })
             .then(function (response) {
-                if (response.data.insertedId) {
-                    console.log(response.data);
+                if (response?.data?.error) {
+                    Swal.fire({
+                        position: 'top',
+                        icon: 'error',
+                        title: `${ite.name} </br> Already Exists!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+                if (response?.data?.insertedId) {
                     Swal.fire(
                         "Successful",
                         `${ite.name}Added to Cart!`,
@@ -65,13 +72,13 @@ const AuthProvider = ({ children }) => {
     }
 
     const addUserToMongo = user => {
-        axios.post('https://assignment12-fz53fo930-alam425.vercel.app/users', {
-        // axios.post('http://localhost:3000/users', {
+        // axios.post('https://assignment12-fz53fo930-alam425.vercel.app/users', {
+        axios.post('http://localhost:3000/users', {
             user: user
         })
             .then(function (response) {
                 if (response.data.insertedId) {
-                    console.log(response.data);
+                    console.log( "Welcome", user.displayName);
                 }
             })
             .catch(function (error) {
@@ -102,10 +109,6 @@ const AuthProvider = ({ children }) => {
             .then(res => res.json())
             .then(data => {
                 setInstructors(data);
-                const maleInstructor = data.filter(i => i.gender === 'male');
-                setMaleInstructors(maleInstructor);
-                const femaleInstructor = data.filter(i => i.gender === 'female');
-                setFemaleInstructors(femaleInstructor);
             })
     }, [])
 
@@ -125,8 +128,16 @@ const AuthProvider = ({ children }) => {
             })
     }, [])
 
+    useEffect(() => {
+        fetch("https://assignment12-fz53fo930-alam425.vercel.app/users")
+            .then(res => res.json())
+            .then(data => {
+                setAllusers(data);
+            })
+    }, [])
+
     const info = {
-        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, maleInstructors, femaleInstructors, specialities, review, addToCart, setCart, Cart, addUserToMongo
+        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, specialities, review, addToCart, setCart, Cart, addUserToMongo, allusers
     }
 
     return (

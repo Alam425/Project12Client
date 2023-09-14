@@ -3,11 +3,12 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import Swal from "sweetalert2";
 
 const Register = () => {
 
     const navigate = useNavigate();
-    const { auth, loginViaGoogle, addUserToMongo } = useContext(AuthContext);
+    const { auth, addUserToMongo } = useContext(AuthContext);
     const [see, setSee] = useState(false);
     const [se, setSe] = useState(false);
     const [error, setError] = useState("");
@@ -15,15 +16,6 @@ const Register = () => {
     const [error3, setError3] = useState("");
     const [error4, setError4] = useState("");
 
-    const googleLogin = () => {
-        loginViaGoogle()
-            .then((result) => {
-                const user = result.user;
-                addUserToMongo(user);
-            }).catch((error) => {
-                console.log(error.message);
-            });
-    }
 
     const formSubmitted = (e) => {
         e.preventDefault();
@@ -65,14 +57,41 @@ const Register = () => {
                 )
                     .then(() => {
                         addUserToMongo(result.user);
+                        if (result?.user) {
+                            Swal.fire({
+                                position: 'top',
+                                icon: 'success',
+                                title: `Welcome ${result?.user?.displayName}!`,
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
+                        }
                     })
-                    .catch((error) => {
-                        console.log(error.message);
+                    .catch((e) => {
+                        if (e?.message) {
+                            Swal.fire({
+                                position: 'top',
+                                icon: 'error',
+                                title: `${result.user} </br> Already Exists!`,
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
+                        };
                     });
                 e.target.reset();
                 navigate('/', { replace: true });
             })
-            .catch((e) => { console.log(e); })
+            .catch((e) => { 
+                if (e?.message) {
+                    Swal.fire({
+                        position: 'top',
+                        icon: 'error',
+                        title: `User Already Exists!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
     }
 
     return (
@@ -132,19 +151,12 @@ const Register = () => {
                             </div>
                         </div>
                         <label className="label">
-                            <p className="font-semibold text-slate-700">Already have an account? <Link className="text-lg underline" to='/login'>Login Now.</Link></p>
+                            <p className="font-semibold text-slate-700">Already have an account? <Link className="text-lg underline" to='/page/login'>Login Now.</Link></p>
                         </label>
                         <h3 className="text-red-600 text-xl text-center font-semibold">{error || error2 || error3 || error4}</h3>
                     </div>
                     <div className="form-control w-full px-8 pb-8 mt-0">
                         <input type="submit" className="btn btn-primary btn-outline" value="Register" />
-                    </div>
-                    <div className="mx-8">
-
-                        <div onClick={googleLogin} className="btn btn-success mb-8 text-xl w-full">
-                            <div><FaGoogle /></div>
-                            <div>Login Via Google</div>
-                        </div>
                     </div>
                 </form>
             </div>
