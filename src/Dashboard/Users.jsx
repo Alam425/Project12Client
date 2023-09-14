@@ -1,5 +1,9 @@
 const Users = ({ users, index }) => {
     console.log(users);
+
+    // Unexpected Application Error!
+    // Objects are not valid as a React child (found: object with keys {}). If you meant to render a collection of children, use an array instead.
+
     return (
         {/* <tr>
                 <td>
