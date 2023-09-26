@@ -1,9 +1,10 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
-import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
+
 
 const Register = () => {
 
@@ -20,10 +21,33 @@ const Register = () => {
     const formSubmitted = (e) => {
         e.preventDefault();
         const name = e.target.name.value;
-        const photo = e.target.photo.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
         const confirmPassword = e.target.confirmPassword.value;
+
+        const photo = e.target.photo;
+        const imgHostingUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_TOKEN}`;
+        const fData = new FormData();
+        // fData.set("key", import.meta.env.VITE_IMAGE_TOKEN)
+        fData.append("image", photo[0])
+        fetch(imgHostingUrl, {
+            method: 'POST',
+            body: fData
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error(`Image upload failed with status ${res.status}`);
+                }
+                return res.json();
+            })
+            .then((data) => {
+                console.log('Image uploaded successfully:', data);
+            })
+            .catch((error) => {
+                console.error('Error uploading image:', error);
+            });
+
+
 
         if (password.length < 6) {
             setError("Password Must Contain More Than 5 Characters");
@@ -52,18 +76,19 @@ const Register = () => {
         createUserWithEmailAndPassword(auth, email, confirmPassword)
             .then(result => {
                 updateProfile(auth.currentUser, {
-                    photoURL: photo, displayName: name
+                    photoURL: photo, displayName: name,
                 }
                 )
                     .then(() => {
                         addUserToMongo(result.user);
+                        console.log(result.user);
                         if (result?.user) {
                             Swal.fire({
                                 position: 'top',
                                 icon: 'success',
                                 title: `Welcome ${result?.user?.displayName}!`,
                                 showConfirmButton: false,
-                                timer: 2000
+                                timer: 3000
                             })
                         }
                     })
@@ -78,19 +103,17 @@ const Register = () => {
                             })
                         };
                     });
-                e.target.reset();
-                navigate('/', { replace: true });
+                // e.target.reset();
+                // navigate('/', { replace: true });
             })
-            .catch((e) => { 
-                if (e?.message) {
-                    Swal.fire({
-                        position: 'top',
-                        icon: 'error',
-                        title: `User Already Exists!`,
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
+            .catch((e) => {
+                Swal.fire({
+                    position: 'top',
+                    icon: 'error',
+                    title: `${e.message}`,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             })
     }
 
@@ -106,19 +129,20 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Name</span>
                             </label>
-                            <input required type="text" name="name" className="input input-bordered" />
+                            <input type="text" name="name" className="input input-bordered" />
                         </div>
-                        <div className="form-control">
+                        <div className="form-control w-full max-w-full">
                             <label className="label">
                                 <span className="label-text">PhotoURL</span>
                             </label>
-                            <input required type="text" name="photo" className="input input-bordered" />
+                            {/* <input type="file" name="photo" className="file-input file-input-bordered w-full" /> */}
+                            <input type="text" name="photo" className="input input-bordered" />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input required type="email" name="email" className="input input-bordered" />
+                            <input type="email" name="email" className="input input-bordered" />
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -126,7 +150,7 @@ const Register = () => {
                             </label>
                             <div className="relative">
                                 <div>
-                                    <input required className="input input-bordered w-full" type={see ? 'text' : 'password'} name="password" id="" />
+                                    <input className="input input-bordered w-full" type={see ? 'text' : 'password'} name="password" id="" />
                                 </div>
                                 <div className="text-xl absolute top-4 right-5" onClick={() => setSee(!see)}>
                                     {
@@ -141,7 +165,7 @@ const Register = () => {
                             </label>
                             <div className="relative">
                                 <div>
-                                    <input required className="input input-bordered w-full" type={se ? 'text' : 'password'} name="confirmPassword" id="" />
+                                    <input className="input input-bordered w-full" type={se ? 'text' : 'password'} name="confirmPassword" id="" />
                                 </div>
                                 <div className="text-xl absolute top-4 right-5" onClick={() => setSe(!se)}>
                                     {

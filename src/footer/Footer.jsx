@@ -17,13 +17,13 @@ const Footer = () => {
                 <div className="md:col-span-2 m-5 my-10">
                     <p className="text-xl font-medium text-white">ISLAH ACADEMY is the leading eLearning platform for Islamic Online Courses in Bangladesh. Our online courses are designed in collaboration with the best Islamic scholars and experts of each field from all over the world.</p><br />
                     <div className="flex gap-5 items-center mt-0 justify-items-center text-slate-100">
-                        <div className="tooltip text-xl bg-blue-600 w-6 h-6 rounded" data-tip="Facebook">
+                        <div className="tooltip text-xl bg-blue-600 h-7 p-1 rounded" data-tip="Facebook">
                             <Link target='_blank' to='https://www.facebook.com/'><FaFacebookF /></Link><br />
                         </div>
-                        <div className="tooltip text-xl bg-red-400 w-6 h-6 rounded" data-tip="Instagram">
+                        <div className="tooltip text-xl bg-red-400 h-7 p-1 rounded" data-tip="Instagram">
                             <Link target='_blank' to='https://www.instagram.com/'><FaInstagram /></Link><br />
                         </div>
-                        <div className="tooltip text-xl bg-sky-600 w-6 h-6 rounded" data-tip="LinkdIn">
+                        <div className="tooltip text-xl bg-sky-500 h-7 p-1 rounded" data-tip="LinkdIn">
                             <Link target='_blank' to='https://www.linkedin.com/'><FaLinkedinIn /></Link><br />
                         </div>
                     </div>

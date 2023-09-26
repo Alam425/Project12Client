@@ -12,14 +12,14 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    axios.get('https://assignment12-fz53fo930-alam425.vercel.app/cart')
-    // axios.get('http://localhost:3000/cart')
-    .then(function (response) {
-      setCart(response.data);
-    })
-    .catch(function (error) {
-      console.log(error.message);
-    })
+    axios.get('https://assignment12-3fp9d56r0-alam425.vercel.app/cart')
+      // axios.get('http://localhost:3000/cart')
+      .then(function (response) {
+        setCart(response.data);
+      })
+      .catch(function (error) {
+        console.log(error.message);
+      })
   }, [])
 
   return (
@@ -88,7 +88,12 @@ const Navbar = () => {
         <div className="navbar-end">
           {user ?
             <div className="flex justify-between items-center gap-5">
-              <div className="border-4 border-white btn btn-success relative"><FaShoppingCart className="w-7 h-7" /><div className="badge badge-primary absolute m-0 p-1 -top-3 -right-2">{Cart.length}</div></div>
+              <Link to='/page/cart' className="border-4 border-white btn btn-success relative">
+                <FaShoppingCart className="w-7 h-7" />
+                <div className="badge badge-primary absolute m-0 p-1 -top-3 -right-2">
+                  {Cart.length}
+                </div>
+              </Link>
               <div className="btn flex" onClick={signOut}>
                 <div className="tooltip tooltip-bottom" data-tip={user.displayName}>
                   <img src={user.photoURL} className="w-8 rounded h-8" alt={user.displayName} />

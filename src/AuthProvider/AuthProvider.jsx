@@ -10,6 +10,7 @@ const provider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
 
+
     const [Cart, setCart] = useState([]);
     const [item, setItem] = useState([]);
     const [specialities, setSpecialities] = useState([]);
@@ -17,7 +18,8 @@ const AuthProvider = ({ children }) => {
     const [allusers, setAllusers] = useState([]);
     const [instructors, setInstructors] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(null);    
+    
 
     const registerViaEmail = (email, password) => {
         setLoading(true);
@@ -44,8 +46,8 @@ const AuthProvider = ({ children }) => {
     }
 
     const addToCart = ite => {
-        // axios.post('https://assignment12-fz53fo930-alam425.vercel.app/cart', {
-        axios.post('http://localhost:3000/cart', {
+        axios.post('https://assignment12-3fp9d56r0-alam425.vercel.app/cart', {
+        // axios.post('http://localhost:3000/cart', {
             item: ite
         })
             .then(function (response) {
@@ -61,7 +63,7 @@ const AuthProvider = ({ children }) => {
                 if (response?.data?.insertedId) {
                     Swal.fire(
                         "Successful",
-                        `${ite.name}Added to Cart!`,
+                        `${ite.name} </br> Added to Cart!`,
                         'success'
                     )
                 }
@@ -72,8 +74,9 @@ const AuthProvider = ({ children }) => {
     }
 
     const addUserToMongo = user => {
-        // axios.post('https://assignment12-fz53fo930-alam425.vercel.app/users', {
-        axios.post('http://localhost:3000/users', {
+        const numbId = 100000;
+        axios.post('https://assignment12-3fp9d56r0-alam425.vercel.app/users', {
+        // axios.post('http://localhost:3000/users', {
             user: user
         })
             .then(function (response) {
@@ -97,7 +100,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
     useEffect(() => {
-        fetch("https://assignment12-fz53fo930-alam425.vercel.app/class")
+        fetch("https://assignment12-3fp9d56r0-alam425.vercel.app/class")
             .then(res => res.json())
             .then(data => {
                 setItem(data);
@@ -105,7 +108,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
     useEffect(() => {
-        fetch("https://assignment12-fz53fo930-alam425.vercel.app/instructor")
+        fetch("https://assignment12-3fp9d56r0-alam425.vercel.app/instructor")
             .then(res => res.json())
             .then(data => {
                 setInstructors(data);
@@ -113,7 +116,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
     useEffect(() => {
-        fetch("https://assignment12-fz53fo930-alam425.vercel.app/specialities")
+        fetch("https://assignment12-3fp9d56r0-alam425.vercel.app/specialities")
             .then(res => res.json())
             .then(data => {
                 setSpecialities(data);
@@ -121,7 +124,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
     useEffect(() => {
-        fetch("https://assignment12-fz53fo930-alam425.vercel.app/reviews")
+        fetch("https://assignment12-3fp9d56r0-alam425.vercel.app/reviews")
             .then(res => res.json())
             .then(data => {
                 setReview(data);
@@ -129,10 +132,10 @@ const AuthProvider = ({ children }) => {
     }, [])
 
     useEffect(() => {
-        fetch("https://assignment12-fz53fo930-alam425.vercel.app/users")
+        fetch("https://assignment12-3fp9d56r0-alam425.vercel.app/users")
             .then(res => res.json())
             .then(data => {
-                setAllusers(data);
+                setAllusers(data);                
             })
     }, [])
 

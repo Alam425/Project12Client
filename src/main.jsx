@@ -26,6 +26,7 @@ import InstructorDetails from './common/InstructorDetails';
 import Private from './Private/Private';
 import Dashboard from './Dashboard/Dashboard';
 import Page from './Page/Page';
+import UserCart from './Dashboard/Cart/UserCart';
 
 const router = createBrowserRouter([
   {
@@ -79,10 +80,13 @@ const router = createBrowserRouter([
     }, {
       path: "/page/tutor/:_id",
       element: <InstructorDetails />,
-      loader: ({ params }) => fetch(`https://assignment12-fz53fo930-alam425.vercel.app/tutor/${params._id}`)
+      loader: ({ params }) => fetch(`https://assignment12-3fp9d56r0-alam425.vercel.app/tutor/${params._id}`)
     }, {
       path: "/page/dashboard",
       element: <Dashboard />
+    }, {
+      path: "/page/cart",
+      element: <UserCart />
     }, {
       path: "/page/instructors",
       element: <Instructors></Instructors>
