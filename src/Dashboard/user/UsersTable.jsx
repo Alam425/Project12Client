@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext } from "../AuthProvider/AuthProvider";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Users from "./Users";
 
 const UsersTable = () => {

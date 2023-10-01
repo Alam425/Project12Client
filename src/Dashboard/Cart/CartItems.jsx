@@ -1,7 +1,5 @@
 import axios from "axios";
-import { useContext } from "react";
 import Swal from "sweetalert2";
-import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const CartItems = ({ cartItem, index }) => {
 
@@ -21,38 +19,41 @@ const CartItems = ({ cartItem, index }) => {
                     // axios.delete(`https://assignment12-3fp9d56r0-alam425.vercel.app/cart/${id}`)
                     axios.delete(`http://localhost:3000/cart/${id}`)
                         .then(data => {
-                            window.location.reload();
                             if (data?.data?.deletedCount > 0) {
                                 Swal.fire(
                                     'Deleted!',
-                                    `${name} has been deleted`,
+                                    `${name} has been removed successfully...!!`,
                                     'success'
                                 );
                             }
+                            window.location.reload();
                         })
+                        .catch(r => console.log(r.message))
                 }
             })
     }
 
-    const CoursePayment = id => {
-        console.log(id);
-    }
 
     return (
-        <div className="my-5 rounded-md me-5">
-            <div className="grid grid-cols-11 gap-2 sm:gap-5 items-center justify-center text-md md:text-xl">
-                <div className="w-10 text-gray-700 font-semibold text-center">{index + 1}</div>
+        <div className="my-5 me-5">
+            <div className="grid grid-cols-12 gap-2 sm:gap-5 items-center justify-center text-md md:text-xl">
+
+                <div className="text-gray-700 font-semibold text-center">{index + 1}.</div>
+
                 <div className="col-span-2 hidden sm:block">
                     <img src={image} alt={name} className="w-24 h-24 mx-auto rounded-xl" />
                 </div>
+
                 <div className="col-span-5 sm:col-span-4 text-slate-700 font-bold">{name}</div>
-                <div className="text-amber-500 col-span-3 sm:col-span-2 font-semibold">Price : <span className="text-yellow-600">{price} ৳</span></div>
-                <div className="col-span-2">
+
+                <div className="text-amber-500 col-span-3 sm:col-span-2 font-semibold">Price : <span className="text-green-600">{price}</span>৳</div>
+
+                <div className="col-span-3">
                     <div className="grid grid-cols-1 gap-2">
-                        <button onClick={() => CoursePayment(_id)} className="btn-success btn">CheckOut</button>
                         <button onClick={() => deletecart(_id)} className="btn-error btn">Remove</button>
                     </div>
                 </div>
+
             </div>
         </div>
     );

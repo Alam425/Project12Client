@@ -18,7 +18,8 @@ const AuthProvider = ({ children }) => {
     const [allusers, setAllusers] = useState([]);
     const [instructors, setInstructors] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState(null);    
+    const [user, setUser] = useState(null);  
+    const [PayAmount, setPayAmount] = useState("");  
     
 
     const registerViaEmail = (email, password) => {
@@ -62,9 +63,7 @@ const AuthProvider = ({ children }) => {
                 }
                 if (response?.data?.insertedId) {
                     Swal.fire(
-                        "Successful",
-                        `${ite.name} </br> Added to Cart!`,
-                        'success'
+                        `${ite.name} </br> Added to Cart!`
                     )
                 }
             })
@@ -140,7 +139,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
     const info = {
-        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, specialities, review, addToCart, setCart, Cart, addUserToMongo, allusers
+        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, specialities, review, addToCart, setCart, Cart, addUserToMongo, allusers, PayAmount, setPayAmount
     }
 
     return (
