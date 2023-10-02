@@ -20,7 +20,9 @@ const AuthProvider = ({ children }) => {
     const [allusers, setAllusers] = useState([]);
     const [instructors, setInstructors] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [noSeat, setNoSeat] = useState(true);
     const [user, setUser] = useState(null);
+    const [courseUser, setCourseUser] = useState(null);
     const [PayAmount, setPayAmount] = useState("");
 
 
@@ -181,7 +183,7 @@ const AuthProvider = ({ children }) => {
 
 
     const info = {
-        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, specialities, review, addToCart, setCart, Cart, addUserToMongo, allusers, PayAmount, setPayAmount, carrt, addToPurchasedCourses, courses
+        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, specialities, review, addToCart, setCart, Cart, addUserToMongo, allusers, PayAmount, setPayAmount, carrt, addToPurchasedCourses, courses, courseUser, setCourseUser, noSeat, setNoSeat
     }
 
     return (
