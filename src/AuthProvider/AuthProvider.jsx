@@ -11,6 +11,8 @@ const provider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
 
 
+    const [courses, setCourses] = useState([]);
+    const [carrt, setCarrt] = useState([]);
     const [Cart, setCart] = useState([]);
     const [item, setItem] = useState([]);
     const [specialities, setSpecialities] = useState([]);
@@ -18,9 +20,9 @@ const AuthProvider = ({ children }) => {
     const [allusers, setAllusers] = useState([]);
     const [instructors, setInstructors] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState(null);  
-    const [PayAmount, setPayAmount] = useState("");  
-    
+    const [user, setUser] = useState(null);
+    const [PayAmount, setPayAmount] = useState("");
+
 
     const registerViaEmail = (email, password) => {
         setLoading(true);
@@ -47,8 +49,9 @@ const AuthProvider = ({ children }) => {
     }
 
     const addToCart = ite => {
+
         axios.post('https://assignment12-3fp9d56r0-alam425.vercel.app/cart', {
-        // axios.post('http://localhost:3000/cart', {
+            // axios.post('http://localhost:3000/cart', {
             item: ite
         })
             .then(function (response) {
@@ -64,8 +67,17 @@ const AuthProvider = ({ children }) => {
                 if (response?.data?.insertedId) {
                     Swal.fire(
                         `${ite.name} </br> Added to Cart!`
-                        )
-                        window.location.reload();
+                    )
+                    axios.put(`http://localhost:3000/class/availableSeats/${ite._id}`)
+                        .then((response) => {
+                            if (response.data.modifiedCount > 0) {
+                                window.location.reload();
+                            }
+                        })
+                        .catch((error) => {
+                            console.error('Error decreasing item');
+                        });
+
                 }
             })
             .catch(function (error) {
@@ -74,19 +86,30 @@ const AuthProvider = ({ children }) => {
     }
 
     const addUserToMongo = user => {
-        user.phoneNumber = "student";
         axios.post('https://assignment12-3fp9d56r0-alam425.vercel.app/users', {
-        // axios.post('http://localhost:3000/users', {
+            // axios.post('http://localhost:3000/users', {
             user
         })
             .then(function (response) {
                 if (response.data.insertedId) {
-                    console.log( "Welcome", user.displayName);
+                    console.log("Welcome", user.displayName);
                 }
             })
             .catch(function (error) {
                 console.log(error.message);
             });
+    }
+
+    const addToPurchasedCourses = () => {
+        axios.post('http://localhost:3000/courses', { item: {carrt, user} })
+        .then(function (response) {
+            if (response.data.insertedId) {
+                console.log("Welcome", user.displayName);
+            }
+        })
+        .catch(function (error) {
+            console.log(error.message);
+        });
     }
 
     useEffect(() => {
@@ -105,6 +128,15 @@ const AuthProvider = ({ children }) => {
             .then(res => res.json())
             .then(data => {
                 setItem(data);
+            })
+    }, [])
+
+    useEffect(() => {
+        // fetch("https://assignment12-3fp9d56r0-alam425.vercel.app/courses")
+        fetch("http://localhost:3000/courses")
+            .then(res => res.json())
+            .then(data => {
+                setCourses(data);
             })
     }, [])
 
@@ -136,12 +168,20 @@ const AuthProvider = ({ children }) => {
         fetch("https://assignment12-3fp9d56r0-alam425.vercel.app/users")
             .then(res => res.json())
             .then(data => {
-                setAllusers(data);                
+                setAllusers(data);
             })
     }, [])
 
+    useEffect(() => {
+        axios.get('https://assignment12-3fp9d56r0-alam425.vercel.app/cart')
+            .then(data => {
+                setCarrt(data?.data);
+            })
+    }, [])
+
+
     const info = {
-        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, specialities, review, addToCart, setCart, Cart, addUserToMongo, allusers, PayAmount, setPayAmount
+        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, specialities, review, addToCart, setCart, Cart, addUserToMongo, allusers, PayAmount, setPayAmount, carrt, addToPurchasedCourses, courses
     }
 
     return (

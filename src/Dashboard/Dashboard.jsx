@@ -1,4 +1,5 @@
 import Instructors from "./Instructor/Instructors";
+import Courses from "./user/Courses";
 import UsersTable from "./user/UsersTable";
 
 const Dashboard = () => {
@@ -7,8 +8,9 @@ const Dashboard = () => {
 
     return (
         <div>
-            <UsersTable/>
-            <Instructors/>
+            <Courses/>
+            {/* <UsersTable/>
+            <Instructors/> */}
         </div>
     );
 };

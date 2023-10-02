@@ -7,31 +7,22 @@ import { Link } from "react-router-dom";
 
 const UserCart = () => {
 
-    const [cart, setCart] = useState([]);
-    const { setPayAmount } = useContext(AuthContext);
+    const { setPayAmount, carrt } = useContext(AuthContext);
 
-    const array1 = cart.map(price => price.price);
-    const sumWithInitial = array1.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    setPayAmount(sumWithInitial);
+    const a1 = carrt.map(price => price.price);
+    const sum = a1.reduce((accu, curtVal) => accu + curtVal, 0);
 
-    useEffect(() => {
-        axios.get('https://assignment12-3fp9d56r0-alam425.vercel.app/cart')
-            .then(data => {
-                setCart(data?.data);
-            })
-    }, [])
-
-
+    setPayAmount(sum.toFixed(2));
 
     return (
         <div className="mt-20">
-            <div className="flex justify-evenly">
-                <div className="text-purple-500 text-xl text-center font-semibold">Total Price : <span className="text-green-600">{sumWithInitial}</span>৳</div>
-                <Link to='/page/payment' className="btn-success btn">CheckOut</Link>
+            <div className="flex justify-center gap-10 items-center">
+                <div className="text-violet-700 text-xl text-center font-bold">Total Price : <span className="text-green-600">{sum} ৳</span></div>
+                <Link to='/page/payment' className="btn-success btn text-amber-50">CheckOut</Link>
             </div>
             <div className="">
                 {
-                    cart.map((cartItem, index) => <CartItems index={index} key={cartItem._id} cartItem={cartItem}></CartItems>)
+                    carrt.map((cartItem, index) => <CartItems index={index} key={cartItem._id} cartItem={cartItem}></CartItems>)
                 }
             </div>
         </div>

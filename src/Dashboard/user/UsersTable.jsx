@@ -7,15 +7,15 @@ const UsersTable = () => {
     const { allusers } = useContext(AuthContext);
 
     return (
-        <table className="mt-20 mb-5 px-20 table-zebra table">
+        <table className="mt-20 mb-5 px-20 w-full text-center text-zinc-400">
             <thead>
-                <tr>
-                    <th>S/No</th>
-                    <th className="hidden sm:block">Image</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Change Role</th>
-                    <th>Remove</th>
+                <tr className="">
+                    <th className="pb-5">S/No</th>
+                    <th className="pb-5 hidden sm:block">Image</th>
+                    <th className="pb-5">Name</th>
+                    <th className="pb-5 hidden sm:block">Email</th>
+                    <th className="pb-5">Change Role</th>
+                    <th className="pb-5">Remove</th>
                 </tr>
             </thead>
             <tbody>

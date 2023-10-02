@@ -10,7 +10,7 @@ const Payment = () => {
     const [cardError, setCardError] = useState('');
     const stripe = useStripe();
     const elements = useElements();
-    const { PayAmount, user, Cart } = useContext(AuthContext);
+    const { PayAmount, user, Cart, addToPurchasedCourses } = useContext(AuthContext);
     const navigate = useNavigate();
     const price = PayAmount;
     const [clientSecret, setClientSecret] = useState("");
@@ -74,9 +74,6 @@ const Payment = () => {
 
         setProcessing(false);
 
-        const go = () => {
-            navigate('/page/success');
-        }
 
         if (paymentIntent.status === "succeeded") {
             const transanctionId = paymentIntent.id;
@@ -104,7 +101,8 @@ const Payment = () => {
                 })
                 .catch(r => console.log(r))
         }
-        go();
+        addToPurchasedCourses();
+        navigate('/page/success');
     }
 
 

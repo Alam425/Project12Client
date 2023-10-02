@@ -114,13 +114,13 @@ const Users = ({ users, index }) => {
     }
 
     return (
-        <tr className="font-bold">
-            <td>{index + 1}</td>
-            <td className="w-16 h-12">
+        <tr className="font-bold py-40">
+            <td className="py-5">{index + 1}</td>
+            <td className="w-12 h-10 hidden sm:block m-auto">
                 <img src={photoURL} className="rounded-full" alt={displayName} />
             </td>
             <td className="text-violet-600">{displayName}</td>
-            <td className="text-sm text-gray-600">{email}</td>
+            <td className="text-sm text-gray-500 hidden sm:block">{email}</td>
             <td >
                 {
                     phoneNumber === null &&

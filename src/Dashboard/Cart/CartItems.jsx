@@ -50,7 +50,7 @@ const CartItems = ({ cartItem, index }) => {
 
                 <div className="col-span-3">
                     <div className="grid grid-cols-1 gap-2">
-                        <button onClick={() => deletecart(_id)} className="btn-error btn">Remove</button>
+                        <button onClick={() => deletecart(_id)} className="btn-error text-white btn">Remove</button>
                     </div>
                 </div>
 
