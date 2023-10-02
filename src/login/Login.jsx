@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 
 const Login = () => {
     const [see, setSee] = useState(false);
-    const { loginViaGoogle, loginViaEmail } = useContext(AuthContext);
+    const { loginViaGoogle, loginViaEmail, addUserToMongo } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
     const from = location?.state?.from?.pathname || '/';
@@ -38,6 +38,7 @@ const Login = () => {
         loginViaGoogle()
             .then((result) => {
                 const user = result.user;
+                addUserToMongo(user);
                 navigate(from, { replace: true });
                 if (result) {
                     Swal.fire({

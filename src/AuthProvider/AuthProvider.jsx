@@ -64,7 +64,8 @@ const AuthProvider = ({ children }) => {
                 if (response?.data?.insertedId) {
                     Swal.fire(
                         `${ite.name} </br> Added to Cart!`
-                    )
+                        )
+                        window.location.reload();
                 }
             })
             .catch(function (error) {
@@ -73,10 +74,10 @@ const AuthProvider = ({ children }) => {
     }
 
     const addUserToMongo = user => {
-        const numbId = 100000;
+        user.phoneNumber = "student";
         axios.post('https://assignment12-3fp9d56r0-alam425.vercel.app/users', {
         // axios.post('http://localhost:3000/users', {
-            user: user
+            user
         })
             .then(function (response) {
                 if (response.data.insertedId) {
@@ -99,7 +100,8 @@ const AuthProvider = ({ children }) => {
     }, [])
 
     useEffect(() => {
-        fetch("https://assignment12-3fp9d56r0-alam425.vercel.app/class")
+        // fetch("https://assignment12-3fp9d56r0-alam425.vercel.app/class")
+        fetch("http://localhost:3000/class")
             .then(res => res.json())
             .then(data => {
                 setItem(data);

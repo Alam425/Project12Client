@@ -2,8 +2,8 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { Navigate } from "react-router-dom";
 
 
 const Payment = () => {
@@ -11,7 +11,7 @@ const Payment = () => {
     const stripe = useStripe();
     const elements = useElements();
     const { PayAmount, user, Cart } = useContext(AuthContext);
-
+    const navigate = useNavigate();
     const price = PayAmount;
     const [clientSecret, setClientSecret] = useState("");
     const [processing, setProcessing] = useState(false);
@@ -74,6 +74,10 @@ const Payment = () => {
 
         setProcessing(false);
 
+        const go = () => {
+            navigate('/page/success');
+        }
+
         if (paymentIntent.status === "succeeded") {
             const transanctionId = paymentIntent.id;
             const payment = {
@@ -88,9 +92,8 @@ const Payment = () => {
 
             axios.post('http://localhost:3000/payments', payment)
                 .then(res => {
-                    console.log(res.data);
                     if (res.data.insertedId && res.data.deletedCount > 0) {
-                        Swal.fire({
+                            Swal.fire({
                             position: 'top-end',
                             icon: 'success',
                             title: 'Payment Successful',
@@ -98,10 +101,10 @@ const Payment = () => {
                             timer: 3000
                         })
                     }
-                    // <Navigate to="/page/cart" replace={true} />
                 })
                 .catch(r => console.log(r))
         }
+        go();
     }
 
 

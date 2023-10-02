@@ -24,30 +24,7 @@ const Register = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         const confirmPassword = e.target.confirmPassword.value;
-
-        const photo = e.target.photo;
-        const imgHostingUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_TOKEN}`;
-        const fData = new FormData();
-        // fData.set("key", import.meta.env.VITE_IMAGE_TOKEN)
-        fData.append("image", photo[0])
-        fetch(imgHostingUrl, {
-            method: 'POST',
-            body: fData
-        })
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error(`Image upload failed with status ${res.status}`);
-                }
-                return res.json();
-            })
-            .then((data) => {
-                console.log('Image uploaded successfully:', data);
-            })
-            .catch((error) => {
-                console.error('Error uploading image:', error);
-            });
-
-
+        const photo = e.target.photo.value;
 
         if (password.length < 6) {
             setError("Password Must Contain More Than 5 Characters");
@@ -103,8 +80,8 @@ const Register = () => {
                             })
                         };
                     });
-                // e.target.reset();
-                // navigate('/', { replace: true });
+                e.target.reset();
+                navigate('/', { replace: true });
             })
             .catch((e) => {
                 Swal.fire({
@@ -135,7 +112,6 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">PhotoURL</span>
                             </label>
-                            {/* <input type="file" name="photo" className="file-input file-input-bordered w-full" /> */}
                             <input type="text" name="photo" className="input input-bordered" />
                         </div>
                         <div className="form-control">

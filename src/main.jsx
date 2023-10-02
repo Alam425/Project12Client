@@ -28,6 +28,7 @@ import Dashboard from './Dashboard/Dashboard';
 import Page from './Page/Page';
 import UserCart from './Dashboard/Cart/UserCart';
 import PaymentGateway from './Dashboard/Payment/PaymentGateway';
+import Success from './Dashboard/Payment/Success';
 
 const router = createBrowserRouter([
   {
@@ -91,6 +92,9 @@ const router = createBrowserRouter([
     }, {
       path: "/page/payment",
       element: <PaymentGateway />
+    }, {
+      path: "/page/success",
+      element: <Success />
     }, {
       path: "/page/instructors",
       element: <Instructors></Instructors>

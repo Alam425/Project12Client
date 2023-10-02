@@ -4,10 +4,8 @@ import Swal from "sweetalert2";
 
 const Users = ({ users, index }) => {
 
-    const [ yes, setYes ] = useState(users.role);
-
-    const { displayName, photoURL, email, _id } = users;
-
+    const { displayName, photoURL, email, _id, phoneNumber } = users;
+    
     const makeAdmin = id => {
         Swal.fire({
             title: 'Are you sure?',
@@ -21,16 +19,13 @@ const Users = ({ users, index }) => {
                 if (result.isConfirmed) {
                     // axios.patch(`https://assignment12-3fp9d56r0-alam425.vercel.app/users/${_id}`)
                     axios.patch(`http://localhost:3000/users/${id}`, {
-                        users 
-                      })
+                        users
+                    })
                         .then(data => {
                             console.log(data?.data);
                             if (data?.data?.modifiedCount > 0) {
-                                setYes(false);
                                 Swal.fire(
-                                    'Updated!',
-                                    `${displayName} is an admin now!!`,
-                                    'success'
+                                    `${displayName} is an admin now!!`
                                 );
                                 window.location.reload();
                             }
@@ -39,7 +34,7 @@ const Users = ({ users, index }) => {
             })
     }
 
-    const removeAdmin = id => {
+    const makeStudent = id => {
         Swal.fire({
             title: 'Are you sure?',
             icon: 'warning',
@@ -50,15 +45,39 @@ const Users = ({ users, index }) => {
         })
             .then((result) => {
                 if (result.isConfirmed) {
-                    // axios.patch(`https://assignment12-3fp9d56r0-alam425.vercel.app/users/${uid}`)
-                    axios.patch(`http://localhost:3000/users/now/${id}`)
+                    // axios.patch(`https://assignment12-3fp9d56r0-alam425.vercel.app/users/student/${id}`)
+                    axios.patch(`http://localhost:3000/users/student/${id}`)
                         .then(data => {
                             console.log(data?.data);
                             if (data?.data?.modifiedCount > 0) {
                                 Swal.fire(
-                                    'Updated!',
-                                    `${displayName} is regularized!`,
-                                    'success'
+                                    `${displayName} is a Student Now!`
+                                );
+                                window.location.reload();
+                            }
+                        })
+                }
+            })
+    }
+
+    const makeInstructor = id => {
+        Swal.fire({
+            title: 'Are you sure?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Modify it!'
+        })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    // axios.patch(`https://assignment12-3fp9d56r0-alam425.vercel.app/users/instructor/${id}`)
+                    axios.patch(`http://localhost:3000/users/instructor/${id}`)
+                        .then(data => {
+                            console.log(data?.data);
+                            if (data?.data?.modifiedCount > 0) {
+                                Swal.fire(
+                                    `${displayName} is an Instructor Now!`
                                 );
                                 window.location.reload();
                             }
@@ -95,25 +114,29 @@ const Users = ({ users, index }) => {
     }
 
     return (
-        <tr>
+        <tr className="font-bold">
             <td>{index + 1}</td>
-            <td className="w-12 h-12">
+            <td className="w-16 h-12">
                 <img src={photoURL} className="rounded-full" alt={displayName} />
             </td>
-            <td className="font-bold">{displayName}</td>
-            <td className="text-sm">{email}</td>
-            <td>
-                {yes ?
-                    <>
-                        <button onClick={() => removeAdmin(_id)} className="underline text-indigo-600 font-semibold">No</button>
-                    </> :
-                    <>
-                        <button onClick={() => makeAdmin(_id)} className="underline text-indigo-600 font-semibold">Yes</button>
-                    </>
+            <td className="text-violet-600">{displayName}</td>
+            <td className="text-sm text-gray-600">{email}</td>
+            <td >
+                {
+                    phoneNumber === null &&
+                    <div className="text-fuchsia-700 font-semibold flex justify-center items-center">Student&nbsp;<img src="https://www.iconpacks.net/icons/2/free-arrow-next-icon-2825-thumb.png" className="w-8 h-8" alt="arrow" />&nbsp;<button onClick={() => makeInstructor(_id)} className="text-green-600 font-semibold">Instructor</button></div>
+                }
+                {
+                    phoneNumber === "instructor" &&
+                    <div className="text-fuchsia-700 font-semibold flex justify-center items-center">Instructor&nbsp;<img src="https://www.iconpacks.net/icons/2/free-arrow-next-icon-2825-thumb.png" className="w-8 h-8" alt="arrow" />&nbsp;<button onClick={() => makeAdmin(_id)} className="text-indigo-600 font-semibold">Admin</button></div>
+                }
+                {
+                    phoneNumber === "admin" &&
+                    <div className="text-fuchsia-700 font-semibold flex justify-center items-center">Admin&nbsp;<img src="https://www.iconpacks.net/icons/2/free-arrow-next-icon-2825-thumb.png" className="w-8 h-8" alt="arrow" />&nbsp;<button onClick={() => makeStudent(_id)} className="text-green-600 font-semibold">Student</button></div>
                 }
             </td>
             <td>
-                <button onClick={() => deleteUser(_id)} className="underline text-rose-600 font-semibold">Remove</button>
+                <button onClick={() => deleteUser(_id)} className="text-rose-600 font-semibold">Delete</button>
             </td>
         </tr>
     );

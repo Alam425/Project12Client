@@ -11,11 +11,11 @@ const UsersTable = () => {
             <thead>
                 <tr>
                     <th>S/No</th>
-                    <th>Image</th>
+                    <th className="hidden sm:block">Image</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Make Admin</th>
-                    <th>Delete</th>
+                    <th>Change Role</th>
+                    <th>Remove</th>
                 </tr>
             </thead>
             <tbody>

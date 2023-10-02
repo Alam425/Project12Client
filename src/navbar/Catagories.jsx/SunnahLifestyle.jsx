@@ -3,7 +3,7 @@ import ClassDetails from "../../common/ClassDetails";
 const SunnahLifeStyle = () => {
     return (
         <div>
-            <ClassDetails categor={" Sunnah & Life Style "}></ClassDetails>            
+            <ClassDetails categor={" Sunnah & Lifestyle "}></ClassDetails>            
         </div>
     );
 };
