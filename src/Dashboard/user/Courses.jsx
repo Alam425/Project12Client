@@ -4,15 +4,21 @@ import Course from './Course';
 
 const Courses = () => {
 
-    const { courses, setCourseUser } = useContext(AuthContext);
-    setCourseUser(courses[0]?.user);
+    const { user, courses } = useContext(AuthContext);
+    const arr = [];
+    const carrt = courses.map(i=>i?.carrt);
+    const userEmail = carrt.map(i=>i.map(d=>d.userEmail))
+    const ite = carrt.map(i=>i.map(d=>d.ite));
+    console.log(userEmail, ite);
+    
+    // const myCart = userCart.filter( item => currentUser?.email === user?.email );
 
     return (
         <div className='mt-20'>
-            
+
             <div className="text-center text-4xl my-10 underline font-bold">My Enrolled Courses</div>
             {
-                courses[0]?.carrt.map((cartItem, index) => <Course index={index} key={cartItem._id} cartItem={cartItem}></Course>)
+                // myCart?.map((cartItem, index) => <Course index={index} key={cartItem._id} cartItem={cartItem} ></Course>)
             }
         </div>
     );

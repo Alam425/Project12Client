@@ -10,9 +10,9 @@ const Payment = () => {
     const [cardError, setCardError] = useState('');
     const stripe = useStripe();
     const elements = useElements();
-    const { PayAmount, user, Cart, addToPurchasedCourses } = useContext(AuthContext);
+    const { amount, user, carrt, addToPurchasedCourses } = useContext(AuthContext);
     const navigate = useNavigate();
-    const price = PayAmount;
+    const price = amount;
     const [clientSecret, setClientSecret] = useState("");
     const [processing, setProcessing] = useState(false);
 
@@ -82,9 +82,9 @@ const Payment = () => {
                 transanctionId: transanctionId,
                 price: price,
                 date: new Date(),
-                quantity: Cart.length,
-                itemNames: Cart.map(item => item.name),
-                items: Cart.map(item => item._id)
+                quantity: carrt.length,
+                itemNames: carrt.map(item => item.name),
+                items: carrt.map(item => item._id)
             }
 
             axios.post('http://localhost:3000/payments', payment)

@@ -2,7 +2,7 @@
 const Top = () => {
     return (
         <>
-            <div className="md:flex text-center md:text-left pt-16 m-5">
+            <div className="md:flex text-center md:text-left pt-16 m-5 justify-center items-center">
                 <div className="px-10 w-full">
                     <h2 className="text-4xl my-3 font-semibold text-slate-700">ইসলামী জ্ঞানার্জনের যাত্রা শুরু হোক আজই!</h2>
                     <p className="text-xl text-slate-700">জীবনের অনেক সময়তো পাড়ি দিলাম। আজ যদি মারা যাই, তবে কি কবরের জবাবদিহিতার জন্য প্রস্তুত? জাহান্নাম থেকে বাঁচতে পারব তো? </p>
@@ -15,7 +15,7 @@ const Top = () => {
                         </div>
                         <div className="p-2 text-center">
                             <p className="text-3xl font-bold text-slate-700">30+</p>
-                            <p className="text-sm font-bold text-amber-700 whitespace-nowrap">৩০ এর অধিক দেশ থেকে</p>
+                            <p className="text-sm font-bold text-amber-700 whitespace-nowrap">এর অধিক দেশ থেকে</p>
                         </div>
                         <div className="p-2 text-center">
                             <p className="text-3xl font-bold text-slate-700">50+</p>

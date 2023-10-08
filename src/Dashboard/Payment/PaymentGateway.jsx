@@ -9,7 +9,7 @@ const PaymentGateway = () => {
 
     return (
         <div className="my-20">
-            <Elements stripe={stripePromise}><Payment></Payment></Elements>
+            <Elements stripe={stripePromise}><Payment/></Elements>
         </div>
     );
 };

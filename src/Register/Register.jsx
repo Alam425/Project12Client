@@ -58,7 +58,6 @@ const Register = () => {
                 )
                     .then(() => {
                         addUserToMongo(result.user);
-                        console.log(result.user);
                         if (result?.user) {
                             Swal.fire({
                                 position: 'top',

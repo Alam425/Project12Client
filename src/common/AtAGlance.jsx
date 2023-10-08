@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const AtAGlance = ({ i }) => {
 
-    const {addToCart} = useContext(AuthContext);
+    const { addToCart, user } = useContext(AuthContext);
 
     const { image, name, price, _id, instructorName, availableSeats } = i;
 
@@ -14,6 +15,10 @@ const AtAGlance = ({ i }) => {
     }
 
     const addItemToCart = ite => {
+        if(!user){
+            Swal.fire("Login first");
+            return;
+        }
         addToCart(ite);
     }
 
@@ -50,14 +55,12 @@ const AtAGlance = ({ i }) => {
                                         <div className="md:justify-end card-actions">
                                         </div>
                                     </div>
-{/* emnei likhsi, hudai............ */}
                                     <div className="modal-action m-0">
                                         <button onClick={()=>addItemToCart(i)} className="btn btn-primary btn-outline">Add to Cart</button>
                                         <button className="btn btn-info btn-outline">Close</button>
                                     </div>
                                 </form>
                             </dialog>
-                            {/* </Link> */}
                         </div>
                     </div>
                 </div>

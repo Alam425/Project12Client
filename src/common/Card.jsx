@@ -1,21 +1,26 @@
 import { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Card = ({ it }) => {
 
     let { name, image, instructorName, availableSeats, price } = it;
-// availableSeats = 0;
-    const { addToCart, noSeat, setNoSeat } = useContext(AuthContext);
+    
+    const { addToCart, noSeat, setNoSeat, user } = useContext(AuthContext);
 
     if (availableSeats < 1) {
         setNoSeat(false);
     }
     
     const addCart = ite => {
+        if(!user){
+            Swal.fire("Login first");
+            return;
+        }
         addToCart(ite);
     }
 
-    const dynamicClassName = `grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 bg-slate-300 items-center p-5 gap-5 m-5 rounded-lg  ${!noSeat && "bg-red-500"}`;
+    const dynamicClassName = `grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center p-5 gap-5 m-5 rounded-lg  ${!noSeat && "bg-red-500"}`;
 
     return (
         <div className={dynamicClassName}>
