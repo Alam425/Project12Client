@@ -3,18 +3,19 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 
 
 const Payment = () => {
     const [cardError, setCardError] = useState('');
     const stripe = useStripe();
     const elements = useElements();
-    const { amount, user, myCart, addToPurchasedCourses } = useContext(AuthContext);
+    const { amount, user, myCartItem, addToPurchasedCourses } = useContext(AuthContext);
     const navigate = useNavigate();
     const price = amount;
     const [clientSecret, setClientSecret] = useState("");
     const [processing, setProcessing] = useState(false);
+
+    console.log(amount);
 
     useEffect(() => {
         if (price > 0) {
@@ -82,29 +83,20 @@ const Payment = () => {
                 transanctionId: transanctionId,
                 price: price,
                 date: new Date(),
-                quantity: myCart.length,
-                itemNames: myCart.map(item => item?.ite?.name),
-                items: myCart.map(item => item?.ite?._id)
+                item: myCartItem,
+                itemName: myCartItem?.ite?.name,
             }
 
             axios.post('http://localhost:3000/payments', payment)
                 .then(res => {
-                    if (res.data.insertedId && res.data.deletedCount > 0) {
-                            Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Payment Successful',
-                            showConfirmButton: false,
-                            timer: 3000
-                        })
+                    if (res.data.deletedCount > 0) {
+                        console.log(res.data);
                     }
                 })
                 .catch(r => console.log(r))
         }
-        
-        // window.location.reload();
-        // addToPurchasedCourses();
-        // navigate('/page/success');
+        addToPurchasedCourses();
+        navigate('/page/success');
     }
 
 

@@ -20,7 +20,7 @@ const Card = ({ it }) => {
         addToCart(ite);
     }
 
-    const dynamicClassName = `grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center p-5 gap-5 m-5 rounded-lg  ${!noSeat && "bg-red-500"}`;
+    const dynamicClassName = `grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 items-center p-5 gap-5 m-5 rounded-lg ${!noSeat && "bg-red-500"}`;
 
     return (
         <div className={dynamicClassName}>

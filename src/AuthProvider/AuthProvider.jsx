@@ -10,6 +10,7 @@ const provider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
 
+    const [myCartItem, setMyCartItem] = useState([]);
     const [myCart, setMyCart] = useState([]);
     const [courses, setCourses] = useState([]);
     const [carrt, setCarrt] = useState([]);
@@ -94,7 +95,7 @@ const AuthProvider = ({ children }) => {
             });
     }
 
-    
+
     const addUserToMongo = user => {
         axios.post('https://assignment12-3fp9d56r0-alam425.vercel.app/users', {
             user
@@ -109,14 +110,14 @@ const AuthProvider = ({ children }) => {
             });
     }
 
-    
+
     const addToPurchasedCourses = () => {
         axios.post('http://localhost:3000/courses', {
-            carrt
+            myCartItem
         })
             .then(function (response) {
                 if (response.data.insertedId) {
-                    console.log("Welcome", user.displayName);
+                    window.location.reload();
                 }
             })
             .catch(function (error) {
@@ -142,16 +143,6 @@ const AuthProvider = ({ children }) => {
             .then(res => res.json())
             .then(data => {
                 setItem(data);
-            })
-    }, [])
-
-
-    useEffect(() => {
-        // fetch("https://assignment12-3fp9d56r0-alam425.vercel.app/courses")
-        fetch("http://localhost:3000/courses")
-            .then(res => res.json())
-            .then(data => {
-                setCourses(data);
             })
     }, [])
 
@@ -202,16 +193,29 @@ const AuthProvider = ({ children }) => {
 
 
     useEffect(() => {
-            axios.get(`http://localhost:3000/cart/${user?.email}`)
-                .then(data => {
-                    setMyCart(data?.data);
-                })
-                .catch(e => { console.log(e.message); })
-            }, [user])
+        axios.get(`http://localhost:3000/cart/${user?.email}`)
+            .then(data => {
+                setMyCart(data?.data);
+            })
+            .catch(e => { console.log(e.message); })
+    }, [user])
+
+
+    useEffect(() => {
+        axios.get(`http://localhost:3000/courses/`)
+            .then(data => {
+                const myCourses = data?.data?.filter(i => i?.myCartItem?.userEmail === user?.email);
+                setCourses(myCourses);
+            })
+            .catch(e => { console.log(e.message); })
+    }, [user])
+
+
+
 
 
     const info = {
-        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, specialities, review, addToCart, addUserToMongo, allusers, carrt, addToPurchasedCourses, courses, noSeat, setNoSeat, amount, setAmount, myCart, setMyCart
+        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, specialities, review, addToCart, addUserToMongo, allusers, carrt, addToPurchasedCourses, courses, noSeat, setNoSeat, amount, setAmount, myCart, setMyCart, myCartItem, setMyCartItem
     }
 
     return (

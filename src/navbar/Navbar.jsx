@@ -2,15 +2,10 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { FaShoppingCart } from "react-icons/fa";
-import axios from "axios";
 
 const Navbar = () => {
+
   const { user, logOut, myCart } = useContext(AuthContext);
-
-  const signOut = () => {
-    logOut();
-  };
-
 
   return (
     <div className="relative">
@@ -90,7 +85,7 @@ const Navbar = () => {
                   {myCart.length || 0}
                 </div>
               </Link>
-              <div className="btn flex" onClick={signOut}>
+              <div className="btn flex" onClick={logOut}>
                 <div className="tooltip tooltip-bottom" data-tip={user.displayName}>
                   <img src={user.photoURL} className="w-8 rounded h-8" alt={user.displayName} />
                 </div>LogOut

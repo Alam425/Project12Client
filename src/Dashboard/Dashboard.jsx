@@ -1,6 +1,6 @@
 import AllItemInCart from "./Cart/AllItemInCart";
 import Instructors from "./Instructor/Instructors";
-import AllCouses from "./user/AllCouses";
+import Courses from "./user/Courses";
 
 const Dashboard = () => {
 
@@ -8,9 +8,9 @@ const Dashboard = () => {
 
     return (
         <div>
-            <AllItemInCart/>
-            {/* <Instructors/> */}
-            {/* <AllCouses/> */}
+            {/* <Courses/>
+            <AllItemInCart/> */}
+            <Instructors/>
         </div>
     );
 };

@@ -1,11 +1,15 @@
-const Course = ({ cartItem, index }) => {
+import { Link } from "react-router-dom";
 
-    const { image, name, instructorName, category } = cartItem;
+const Course = ({ cartItem, index }) => {
+    
+    const { image, name, instructorName, category } = cartItem?.myCartItem?.ite;
+
+    const categoryWithoutSpaces = category.replace(/\s+/g, '');
 
     return (
         <div className="my-5 me-5">
 
-            <div className="grid grid-cols-12 gap-2 sm:gap-5 items-center justify-center text-md md:text-xl">
+            <div className="grid grid-cols-12 gap-2 sm:gap-5 items-center justify-center md:text-xl">
 
                 <div className="text-gray-700 font-semibold text-center">{index + 1}.</div>
 
@@ -15,9 +19,9 @@ const Course = ({ cartItem, index }) => {
 
                 <div className="col-span-5 sm:col-span-5 text-lg sm:text-2xl text-slate-700 font-bold">{name}</div>
 
-                <div className="text-gray-500 col-span-3 sm:col-span-2 text-md">{instructorName}</div>
+                <div className="text-gray-500 col-span-3 sm:col-span-2 text-base">{instructorName}</div>
 
-                <div className="text-purple-700 col-span-3 sm:col-span-2 text-md">{category}</div>
+                <div className="text-purple-700 col-span-3 sm:col-span-2 text-base"><Link to={`/${categoryWithoutSpaces}`}>{category}</Link></div>
 
             </div>
         </div>

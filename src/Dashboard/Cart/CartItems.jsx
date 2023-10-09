@@ -1,10 +1,20 @@
 import axios from "axios";
+import { useContext } from "react";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { Link } from "react-router-dom";
 
 const CartItems = ({ i, index }) => {
 
-    const { image, name, price, _id } = i.ite;
+    const { image, name, price, _id } = i?.ite;
     
+    const { setMyCartItem, setAmount, myCartItem } = useContext(AuthContext);
+    const setForPayment = () => {
+        setMyCartItem(i);
+        setAmount(price);
+    }
+
+
     const deletecart = id => {
         Swal.fire({
             title: 'Are you sure?',
@@ -20,11 +30,19 @@ const CartItems = ({ i, index }) => {
                     axios.delete(`http://localhost:3000/cart/${id}`)
                         .then(data => {
                             if (data?.data?.deletedCount > 0) {
-                                Swal.fire(
-                                    'Deleted!',
-                                    `${name} has been removed successfully...!!`,
-                                    'success'
-                                );
+                                axios.put(`http://localhost:3000/class/availableSeatsIncrease/${_id}`)
+                                    .then(response => {
+                                        if (response.data.modifiedCount > 0) {
+                                            Swal.fire(
+                                                'Deleted!',
+                                                `${name} has been removed successfully...!!`,
+                                                'success'
+                                            );
+                                        }
+                                    })
+                                    .catch((error) => {
+                                        console.error(error.message);
+                                    });
                             }
                             window.location.reload();
                         })
@@ -50,7 +68,8 @@ const CartItems = ({ i, index }) => {
 
                 <div className="col-span-2">
                     <div className="grid grid-cols-1 gap-2">
-                        <button onClick={() => deletecart(_id)} className="btn-error text-white btn">Remove</button>
+                        <Link to='/page/payment' disabled={price == 0} onClick={setForPayment} className="btn-accent btn">Pay</Link>
+                        <button onClick={() => deletecart(_id)} className="btn-error text-white btn p-0">Remove</button>
                     </div>
                 </div>
 
