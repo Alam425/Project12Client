@@ -94,7 +94,7 @@ const AuthProvider = ({ children }) => {
             });
     }
 
-
+    
     const addUserToMongo = user => {
         axios.post('https://assignment12-3fp9d56r0-alam425.vercel.app/users', {
             user
@@ -109,7 +109,7 @@ const AuthProvider = ({ children }) => {
             });
     }
 
-
+    
     const addToPurchasedCourses = () => {
         axios.post('http://localhost:3000/courses', {
             carrt
@@ -199,6 +199,15 @@ const AuthProvider = ({ children }) => {
                 setCarrt(data);
             })
     }, [])
+
+
+    useEffect(() => {
+            axios.get(`http://localhost:3000/cart/${user?.email}`)
+                .then(data => {
+                    setMyCart(data?.data);
+                })
+                .catch(e => { console.log(e.message); })
+            }, [user])
 
 
     const info = {

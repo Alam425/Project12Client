@@ -1,4 +1,4 @@
-import { FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTelegram, FaTwitter, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -20,11 +20,23 @@ const Footer = () => {
                         <div className="tooltip text-xl bg-blue-600 h-7 p-1 rounded" data-tip="Facebook">
                             <Link target='_blank' to='https://www.facebook.com/'><FaFacebookF /></Link><br />
                         </div>
-                        <div className="tooltip text-xl bg-red-400 h-7 p-1 rounded" data-tip="Instagram">
+                        <div className="tooltip text-xl bg-rose-500 h-7 p-1 rounded" data-tip="Instagram">
                             <Link target='_blank' to='https://www.instagram.com/'><FaInstagram /></Link><br />
                         </div>
-                        <div className="tooltip text-xl bg-sky-500 h-7 p-1 rounded" data-tip="LinkdIn">
+                        <div className="tooltip text-xl bg-sky-700 h-7 p-1 rounded" data-tip="LinkdIn">
                             <Link target='_blank' to='https://www.linkedin.com/'><FaLinkedinIn /></Link><br />
+                        </div>
+                        <div className="tooltip text-xl bg-sky-500 h-7 p-1 rounded" data-tip="Twitter">
+                            <Link target='_blank' to='https://www.twitter.com/'><FaTwitter /></Link><br />
+                        </div>
+                        <div className="tooltip text-xl bg-green-500 h-7 p-1 rounded" data-tip="WhatsApp">
+                            <Link target='_blank' to='https://www.whatsapp.com/'><FaWhatsapp /></Link><br />
+                        </div>
+                        <div className="tooltip text-xl bg-red-600 h-7 p-1 rounded" data-tip="YouTube">
+                            <Link target='_blank' to='https://www.youtube.com/'><FaYoutube /></Link><br />
+                        </div>
+                        <div className="tooltip text-xl bg-sky-500 h-7 p-1 rounded" data-tip="Telegram">
+                            <Link target='_blank' to='https://web.telegram.org/'><FaTelegram /></Link><br />
                         </div>
                     </div>
                 </div>

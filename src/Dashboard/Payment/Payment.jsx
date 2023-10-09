@@ -10,7 +10,7 @@ const Payment = () => {
     const [cardError, setCardError] = useState('');
     const stripe = useStripe();
     const elements = useElements();
-    const { amount, user, carrt, addToPurchasedCourses } = useContext(AuthContext);
+    const { amount, user, myCart, addToPurchasedCourses } = useContext(AuthContext);
     const navigate = useNavigate();
     const price = amount;
     const [clientSecret, setClientSecret] = useState("");
@@ -82,9 +82,9 @@ const Payment = () => {
                 transanctionId: transanctionId,
                 price: price,
                 date: new Date(),
-                quantity: carrt.length,
-                itemNames: carrt.map(item => item.name),
-                items: carrt.map(item => item._id)
+                quantity: myCart.length,
+                itemNames: myCart.map(item => item?.ite?.name),
+                items: myCart.map(item => item?.ite?._id)
             }
 
             axios.post('http://localhost:3000/payments', payment)
@@ -101,8 +101,10 @@ const Payment = () => {
                 })
                 .catch(r => console.log(r))
         }
-        addToPurchasedCourses();
-        navigate('/page/success');
+        
+        // window.location.reload();
+        // addToPurchasedCourses();
+        // navigate('/page/success');
     }
 
 
@@ -125,10 +127,12 @@ const Payment = () => {
                         },
                     }}
                 />
-                <button className="btn-sm btn btn-success m-5" type="submit" disabled={!stripe || !clientSecret || processing}>
-                    Pay
-                </button>
-                <p className="mx-auto w-11/12 text-2xl text-red-600">{cardError}</p>
+                <button className="btn-sm btn btn-success m-5" type="submit" disabled={!stripe || !clientSecret || processing}>Pay</button>
+
+                {
+                    cardError &&
+                    <p className="mx-auto w-11/12 text-2xl text-red-600 p-2 border-red-600 border-4">{cardError}</p>
+                }
             </form>
         </div>
     );

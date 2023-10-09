@@ -5,11 +5,11 @@ import Course from './Course';
 const Courses = () => {
 
     const { user, courses } = useContext(AuthContext);
-    const arr = [];
+    
     const carrt = courses.map(i=>i?.carrt);
     const userEmail = carrt.map(i=>i.map(d=>d.userEmail))
     const ite = carrt.map(i=>i.map(d=>d.ite));
-    console.log(userEmail, ite);
+    // console.log(userEmail, ite);
     
     // const myCart = userCart.filter( item => currentUser?.email === user?.email );
 

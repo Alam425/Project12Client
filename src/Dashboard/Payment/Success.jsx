@@ -1,11 +1,6 @@
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Success = () => {
-
-    const { setUserCartLength } = useContext(AuthContext);
-    setUserCartLength(0);
     
     const navigate = useNavigate();
     const goBack = () => {

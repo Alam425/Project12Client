@@ -8,14 +8,14 @@ const Private = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
 
     if(loading){
-       return <span className="loading loading-infinity loading-lg"></span>
+       return <span className="my-16 mx-auto loading loading-dots w-20"></span>
     }
 
     if(user){
         return children;
     }
 
-    return <Navigate to="/login" state={{ from : navigate }} replace />
+    return <Navigate to="/page/login" state={{ from : navigate }} replace />
 
 };
 
