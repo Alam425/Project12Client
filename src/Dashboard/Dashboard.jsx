@@ -1,6 +1,9 @@
+import ToBeApproved from "./Admin/ToBeApproved";
 import AllItemInCart from "./Cart/AllItemInCart";
+import AddAClassByInstructor from "./Instructor/AddAClassByInstructor";
 import Instructors from "./Instructor/Instructors";
 import Courses from "./user/Courses";
+import UsersTable from "./user/UsersTable";
 
 const Dashboard = () => {
 
@@ -10,7 +13,10 @@ const Dashboard = () => {
         <div>
             {/* <Courses/>
             <AllItemInCart/> */}
-            <Instructors/>
+            {/* <Instructors/>
+            <UsersTable/> */}
+            <AddAClassByInstructor/>
+            <ToBeApproved />
         </div>
     );
 };

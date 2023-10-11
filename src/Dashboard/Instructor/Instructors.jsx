@@ -4,7 +4,7 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 const Instructors = () => {
 
     const { allusers }= useContext(AuthContext);
-    const instructor = allusers.filter(instructor => instructor?.phoneNumber === "admin");
+    const instructor = allusers.filter(instructor => instructor?.phoneNumber === "instructor");
     console.log(instructor);
     return (
         <div className="text-xl m-20">

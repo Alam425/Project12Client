@@ -8,10 +8,14 @@ const Card = ({ it }) => {
     
     const { addToCart, noSeat, setNoSeat, user } = useContext(AuthContext);
 
+    if(it?.status){
+        return;
+    }
+
     if (availableSeats < 1) {
         setNoSeat(false);
     }
-    
+    console.log(it);
     const addCart = ite => {
         if(!user){
             Swal.fire("Login first");

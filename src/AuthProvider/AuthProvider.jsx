@@ -126,6 +126,33 @@ const AuthProvider = ({ children }) => {
     }
 
 
+    const addClassToMongo = (obj) => {
+        const status = "pending";
+        axios.post('http://localhost:3000/class', { ...obj, status })
+            .then(function (response) {
+                if (response.data.insertedId) {
+                    console.log(response.data);
+                    Swal.fire(obj.name, "has been forwarded to admin.")
+                }
+            })
+            .catch(function (error) {
+                console.log(error.message);
+            });
+    }
+
+
+    const approvePendingClass = item => {
+        axios.patch(`http://localhost:3000/cart/${item?._id}`)
+        .then((response) => {
+          console.log('Field unset successfully:', response.data);
+          Swal.fire(item.name, "has been updated.")
+        })
+        .catch((error) => {
+          console.error('Error unsetting field:', error);
+        });
+    }
+
+
     useEffect(() => {
         const userChange = onAuthStateChanged(auth, currentUser => {
             setLoading(false);
@@ -215,7 +242,7 @@ const AuthProvider = ({ children }) => {
 
 
     const info = {
-        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, specialities, review, addToCart, addUserToMongo, allusers, carrt, addToPurchasedCourses, courses, noSeat, setNoSeat, amount, setAmount, myCart, setMyCart, myCartItem, setMyCartItem
+        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, specialities, review, addToCart, addUserToMongo, allusers, carrt, addToPurchasedCourses, courses, noSeat, setNoSeat, amount, setAmount, myCart, setMyCart, myCartItem, setMyCartItem, addClassToMongo, approvePendingClass
     }
 
     return (

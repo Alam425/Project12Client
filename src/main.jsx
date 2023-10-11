@@ -21,7 +21,6 @@ import QuranRecitationTajweed from './navbar/Catagories.jsx/QuranRecitationTajwe
 import IslamicBelief from './navbar/Catagories.jsx/IslamicBelief';
 import SunnahLifestyle from './navbar/Catagories.jsx/SunnahLifestyle';
 import ProductivityLifeHacks from './navbar/Catagories.jsx/ProductivityLifeHacks';
-import Instructors from './Instructors/Instructors';
 import InstructorDetails from './common/InstructorDetails';
 import Private from './Private/Private';
 import Dashboard from './Dashboard/Dashboard';
@@ -30,6 +29,7 @@ import PaymentGateway from './Dashboard/Payment/PaymentGateway';
 import Success from './Dashboard/Payment/Success';
 import Courses from './Dashboard/user/Courses';
 import AllItemInCart from './Dashboard/Cart/AllItemInCart';
+import Instructors from './Dashboard/Instructor/Instructors';
 
 const router = createBrowserRouter([
   {

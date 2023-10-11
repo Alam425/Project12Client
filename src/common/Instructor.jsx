@@ -1,4 +1,4 @@
-import ClassesName from "../Instructors/ClassesName";
+import ClassesName from "../HomepageInstructors/ClassesName";
 
 const Instructor = ({ i }) => {
 
