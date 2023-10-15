@@ -19,7 +19,6 @@ const Login = () => {
         loginViaEmail(email, password)
             .then(result => {
                 const user = result.user;
-                navigate(from, { replace: true });
                 if (result) {
                     Swal.fire({
                         position: 'top',
@@ -27,7 +26,9 @@ const Login = () => {
                         title: `Welcome ${user?.displayName}!`,
                         showConfirmButton: false,
                         timer: 2000
-                    })}
+                    })
+                    navigate(from, { replace: true });
+                }
             })
             .catch(e => {
                 console.log(e.message);
@@ -40,14 +41,15 @@ const Login = () => {
                 const user = result.user;
                 addUserToMongo(user);
                 navigate(from, { replace: true });
-                if (result) {
+                if (user) {
                     Swal.fire({
                         position: 'top',
                         icon: 'success',
                         title: `Welcome ${user?.displayName}!`,
                         showConfirmButton: false,
                         timer: 2000
-                    })}
+                    })
+                }
             }).catch((error) => {
                 console.log(error.message);
             });
@@ -55,7 +57,7 @@ const Login = () => {
 
     return (
         <div>
-            <div className="grid grid-cols-1 justify-center items-center sm:grid-cols-2 mt-20">
+            <div className="grid grid-cols-1 justify-center items-center sm:grid-cols-2 pt-20">
                 <div className="text-center">
                     <h1 className="text-5xl font-bold whitespace-nowrap">Login now!</h1>
                 </div>

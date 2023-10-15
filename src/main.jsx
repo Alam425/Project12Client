@@ -29,7 +29,7 @@ import PaymentGateway from './Dashboard/Payment/PaymentGateway';
 import Success from './Dashboard/Payment/Success';
 import Courses from './Dashboard/user/Courses';
 import AllItemInCart from './Dashboard/Cart/AllItemInCart';
-import Instructors from './Dashboard/Instructor/Instructors';
+import Instructors from './HomepageInstructors/Instructors';
 
 const router = createBrowserRouter([
   {
@@ -88,20 +88,20 @@ const router = createBrowserRouter([
       path: "/page/dashboard",
       element: <Private><Dashboard /></Private>
     }, {
-      path: "/page/cart",
-      element: <Private><AllItemInCart /></Private>
-    }, {
       path: "/page/payment",
       element: <Private><PaymentGateway /></Private>
     }, {
       path: "/page/success",
       element: <Private><Success /></Private>
+      // }, {
+      //   path: "/page/cart",
+      //   element: <Private><AllItemInCart /></Private>
+      // }, {
+      //   path: "/page/courses",
+      //   element: <Private><Courses/></Private>
     }, {
       path: "/page/instructors",
       element: <Instructors></Instructors>
-    }, {
-      path: "/page/courses",
-      element: <Private><Courses/></Private>
     }]
   }, {
     path: "*",

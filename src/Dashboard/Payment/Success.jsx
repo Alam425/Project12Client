@@ -4,7 +4,8 @@ const Success = () => {
 
     const navigate = useNavigate();
     const goBack = () => {
-        navigate("/page/courses");
+        navigate("/page/dashboard");
+        window.location.reload();
     }
 
     return (

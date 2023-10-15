@@ -10,6 +10,7 @@ const provider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
 
+    const [myClasses, setMyClasses] = useState([]);
     const [myCartItem, setMyCartItem] = useState([]);
     const [myCart, setMyCart] = useState([]);
     const [courses, setCourses] = useState([]);
@@ -19,10 +20,13 @@ const AuthProvider = ({ children }) => {
     const [review, setReview] = useState([]);
     const [allusers, setAllusers] = useState([]);
     const [instructors, setInstructors] = useState([]);
+    const [payments, setPayments] = useState([]);
+    const [allPayments, setAllPayments] = useState([]);
     const [loading, setLoading] = useState(true);
     const [noSeat, setNoSeat] = useState(true);
     const [user, setUser] = useState(null);
     const [amount, setAmount] = useState("");
+    const [theme, setTheme] = useState('light');
 
 
     const registerViaEmail = (email, password) => {
@@ -97,9 +101,7 @@ const AuthProvider = ({ children }) => {
 
 
     const addUserToMongo = user => {
-        axios.post('https://assignment12-3fp9d56r0-alam425.vercel.app/users', {
-            user
-        })
+        axios.post('https://assignment12-3fp9d56r0-alam425.vercel.app/users', { user })
             .then(function (response) {
                 if (response.data.insertedId) {
                     console.log("Welcome", user.displayName);
@@ -142,14 +144,42 @@ const AuthProvider = ({ children }) => {
 
 
     const approvePendingClass = item => {
-        axios.patch(`http://localhost:3000/cart/${item?._id}`)
-        .then((response) => {
-          console.log('Field unset successfully:', response.data);
-          Swal.fire(item.name, "has been updated.")
-        })
-        .catch((error) => {
-          console.error('Error unsetting field:', error);
-        });
+
+        axios.patch(`http://localhost:3000/class/${item?._id}`)
+            .then((data) => {
+                if (data.data.modifiedCount) {
+                    Swal.fire(item.name, "has been updated");
+                }
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.error('Error unsetting field:', error);
+            });
+    }
+
+
+    const proceedWithFeedback = hi => {
+
+        axios.put(`http://localhost:3000/class/${hi?._id}`, { hi })
+            .then(r => {
+                console.log(r.data);
+                window.location.reload();
+            })
+            .catch(e => {
+                console.log(e);
+            })
+    }
+
+    const removeFromClass = it => {
+        axios.delete(`http://localhost:3000/class/${it._id}`)
+            .then(data => {
+                console.log(data);
+                if (data.data.deletedCount > 0) {
+                    Swal.fire(it.name, 'has been deleted')
+                }
+                window.location.reload();
+            })
+            .catch(d => console.log(d.message))
     }
 
 
@@ -162,6 +192,16 @@ const AuthProvider = ({ children }) => {
             return userChange;
         }
     }, [])
+
+
+    useEffect(() => {
+        // fetch("https://assignment12-3fp9d56r0-alam425.vercel.app/class")
+        fetch(`http://localhost:3000/myClass/${user?.email}`)
+            .then(res => res.json())
+            .then(data => {
+                setMyClasses(data)
+            })
+    }, [user])
 
 
     useEffect(() => {
@@ -210,6 +250,25 @@ const AuthProvider = ({ children }) => {
     }, [])
 
 
+    let oho = allusers.find(i => i.email === user?.email);
+
+
+    useEffect(() => {
+        fetch(`http://localhost:3000/payments/${user?.email}`)
+            .then(res => res.json())
+            .then(data => {
+                setPayments(data);
+            })
+    }, [user])
+
+
+    useEffect(() => {
+        axios.get('http://localhost:3000/payments')
+            .then(data => setAllPayments(data.data))
+            .catch(e => console.log(e.message))
+    }, [])
+
+
     useEffect(() => {
         fetch("http://localhost:3000/cart")
             .then(res => res.json())
@@ -240,9 +299,8 @@ const AuthProvider = ({ children }) => {
 
 
 
-
     const info = {
-        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, specialities, review, addToCart, addUserToMongo, allusers, carrt, addToPurchasedCourses, courses, noSeat, setNoSeat, amount, setAmount, myCart, setMyCart, myCartItem, setMyCartItem, addClassToMongo, approvePendingClass
+        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, specialities, review, addToCart, addUserToMongo, allusers, carrt, addToPurchasedCourses, courses, noSeat, setNoSeat, amount, setAmount, myCart, setMyCart, myCartItem, setMyCartItem, addClassToMongo, approvePendingClass, myClasses, theme, setTheme, oho, payments, proceedWithFeedback, allPayments, removeFromClass
     }
 
     return (

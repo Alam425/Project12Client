@@ -7,7 +7,7 @@ const UsersTable = () => {
     const { allusers } = useContext(AuthContext);
 
     return (
-        <table className="mt-20 mb-5 px-20 w-full text-center text-zinc-400">
+        <table className="pt-20 mb-5 px-20 w-full text-center text-zinc-400">
             <thead>
                 <tr className="">
                     <th className="pb-5">S/No</th>

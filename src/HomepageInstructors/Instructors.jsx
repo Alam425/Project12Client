@@ -10,7 +10,7 @@ const Instructors = () => {
     
     return (
         <div>
-            <div className="mt-20">
+            <div className="pt-20 m-5">
                 <div className="sm:card-side lg:grid lg:grid-cols-4 lg:items-center shadow-xl border-2 border-slate-300 rounded-2xl m-5 p-5">
                     <figure>
                         <img className="w-80 mx-auto" src="https://aslafacademy.com/wp-content/uploads/2020/05/male-avatar-01-2.png" alt="Album" />

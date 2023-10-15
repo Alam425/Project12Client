@@ -4,22 +4,23 @@ const Instructor = ({ i }) => {
 
     const { email, image, name, nameOfClassesTaken, numberOfClassesTaken, _id } = i;
 
-    const showModal = () => {
-        document.getElementById(_id).showModal()
-    }
+    const showModal = () => { document.getElementById(_id).showModal() }
 
     return (
         <div className="text-center border-4 rounded-2xl">
             <div className="mb-2">
                 <div className="w-80 h-80 mx-auto mb-2">
-                <figure><img className="w-full" src={image} alt={name} /></figure>
+                    <img className="w-full rounded-md" src={image} alt={name} />
                 </div>
-                <p className="my-2 text-2xl font-semibold text-purple-800">{name}</p>
+                <p className="my-2 text-2xl font-semibold text-violet-400 pt-5">{name}</p>
                 <p className="my-1 text-sm font-semibold text-red-700 ">{email}</p>
                 <p className="my-1 text-md font-semibold text-orange-500">Classes Count : <span className="text-indigo-700">{numberOfClassesTaken}</span></p>
 
 
-                <button className="btn bottom-0 " onClick={() => showModal(_id)}>Tap to see Classes</button>
+                {
+                    numberOfClassesTaken !== 0 &&
+                    <button className="underline text-slate-500" onClick={() => showModal(_id)}>Tap to see Classes</button>
+                }
             </div>
 
             <dialog id={_id} className="modal">

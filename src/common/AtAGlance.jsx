@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 const AtAGlance = ({ i }) => {
 
-    const { addToCart, user } = useContext(AuthContext);
+    const { addToCart, user, oho } = useContext(AuthContext);
 
     const { image, name, price, _id, instructorName, availableSeats } = i;
 
@@ -19,6 +19,12 @@ const AtAGlance = ({ i }) => {
             Swal.fire("Login first");
             return;
         }
+
+        if(oho?.phoneNumber !== null ){
+            Swal.fire('You are not an student...!')
+            return;
+        }
+        
         addToCart(ite);
     }
 
@@ -29,13 +35,13 @@ const AtAGlance = ({ i }) => {
                     <img className="w-80 h-52 rounded-xl mx-auto" src={image} alt={name} />
                     <p className="text-2xl font-bold text-pink-600 mt-3">{name}</p>
                     <div className="lg:grid-cols-2 grid grid-cols-1 gap-5 justify-between items-center">
+
                         <div className="flex gap-5 items-center justify-stretch">
                             <p className="text-lg font-semibold text-slate-600">Hadiya : &nbsp;&nbsp;&nbsp;<span className="line-through text-slate-400">{price * 1.6} ৳</span></p>
                             <p className="text-lg font-bold text-amber-600">{price} ৳</p>
                         </div>
+
                         <div>
-                            {/* <Link to={`/class/${_id}`}> */}
-                            {/* Open the modal using ID.showModal() method */}
                             <button className="btn btn-neutral my-2" onClick={() => showModal()}>See Details</button>
                             <dialog id={_id} className="modal">
                                 <form method="dialog" className="modal-box bg-slate-100 ">
@@ -55,9 +61,9 @@ const AtAGlance = ({ i }) => {
                                         <div className="md:justify-end card-actions">
                                         </div>
                                     </div>
-                                    <div className="modal-action m-0">
+                                    <div className="modal-action">
                                         <button onClick={()=>addItemToCart(i)} className="btn btn-primary btn-outline">Add to Cart</button>
-                                        <button className="btn btn-info btn-outline">Close</button>
+                                        <button className="btn btn-accent btn-outline">Close</button>
                                     </div>
                                 </form>
                             </dialog>

@@ -95,7 +95,7 @@ const Register = () => {
 
     return (
         <div>
-            <div className="mt-20 grid grid-cols-1 justify-center items-center sm:grid-cols-2">
+            <div className="pt-20 grid grid-cols-1 justify-center items-center sm:grid-cols-2">
                 <div className="text-center w-full">
                     <h1 className="text-5xl font-bold whitespace-nowrap">Register now!</h1>
                 </div>

@@ -128,11 +128,11 @@ const Users = ({ users, index }) => {
                 }
                 {
                     phoneNumber === "instructor" &&
-                    <div className="text-fuchsia-700 font-semibold flex justify-center items-center">Instructor&nbsp;<img src="https://www.iconpacks.net/icons/2/free-arrow-next-icon-2825-thumb.png" className="w-8 h-8" alt="arrow" />&nbsp;<button onClick={() => makeAdmin(_id)} className="text-indigo-600 font-semibold">Admin</button></div>
+                    <div className="text-green-600 font-semibold flex justify-center items-center">Instructor&nbsp;<img src="https://www.iconpacks.net/icons/2/free-arrow-next-icon-2825-thumb.png" className="w-8 h-8" alt="arrow" />&nbsp;<button onClick={() => makeAdmin(_id)} className="text-indigo-600 font-semibold">Admin</button></div>
                 }
                 {
                     phoneNumber === "admin" &&
-                    <div className="text-fuchsia-700 font-semibold flex justify-center items-center">Admin&nbsp;<img src="https://www.iconpacks.net/icons/2/free-arrow-next-icon-2825-thumb.png" className="w-8 h-8" alt="arrow" />&nbsp;<button onClick={() => makeStudent(_id)} className="text-green-600 font-semibold">Student</button></div>
+                    <div className="text-indigo-600 font-semibold flex justify-center items-center">Admin&nbsp;<img src="https://www.iconpacks.net/icons/2/free-arrow-next-icon-2825-thumb.png" className="w-8 h-8" alt="arrow" />&nbsp;<button onClick={() => makeStudent(_id)} className="text-fuchsia-700 font-semibold">Student</button></div>
                 }
             </td>
             <td>

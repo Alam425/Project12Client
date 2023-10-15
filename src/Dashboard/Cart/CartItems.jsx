@@ -7,13 +7,13 @@ import { Link } from "react-router-dom";
 const CartItems = ({ i, index }) => {
 
     const { image, name, price, _id } = i?.ite;
-    
-    const { setMyCartItem, setAmount, myCartItem } = useContext(AuthContext);
+
+    const { setMyCartItem, setAmount } = useContext(AuthContext);
+
     const setForPayment = () => {
         setMyCartItem(i);
         setAmount(price);
     }
-
 
     const deletecart = id => {
         Swal.fire({
@@ -32,19 +32,16 @@ const CartItems = ({ i, index }) => {
                             if (data?.data?.deletedCount > 0) {
                                 axios.put(`http://localhost:3000/class/availableSeatsIncrease/${_id}`)
                                     .then(response => {
+                                        console.log(response.data);
                                         if (response.data.modifiedCount > 0) {
-                                            Swal.fire(
-                                                'Deleted!',
-                                                `${name} has been removed successfully...!!`,
-                                                'success'
-                                            );
+                                            window.location.reload();
+                                            Swal.fire(`${name} has been removed successfully...`)
                                         }
                                     })
                                     .catch((error) => {
                                         console.error(error.message);
                                     });
                             }
-                            window.location.reload();
                         })
                         .catch(r => console.log(r.message))
                 }
@@ -53,21 +50,21 @@ const CartItems = ({ i, index }) => {
 
 
     return (
-        <div className="my-5 me-5">
+        <div className="me-5 my-5">
             <div className="grid grid-cols-12 gap-2 sm:gap-5 items-center justify-center text-md md:text-xl">
 
                 <div className="text-gray-700 font-semibold text-center">{index + 1}.</div>
 
                 <div className="col-span-2 hidden sm:block">
-                    <img src={image} alt={name} className="md:w-24 md:h-20 sm:w-20 sm:h-16 mx-auto rounded-md" />
+                    <img src={image} alt={name} className="md:w-32 md:h-24 sm:w-20 sm:h-16 mx-auto rounded-md" />
                 </div>
 
                 <div className="col-span-6 sm:col-span-5 text-slate-700 font-bold">{name}</div>
 
-                <div className="text-amber-500 col-span-3 sm:col-span-2 font-semibold">Price : <span className="text-green-600">{price}</span>৳</div>
+                <div className="text-violet-700 col-span-3 sm:col-span-2 font-semibold">Price : <span className="text-green-600">{price}</span> ৳</div>
 
                 <div className="col-span-2">
-                    <div className="grid grid-cols-1 gap-2">
+                    <div className="grid grid-cols-1">
                         <Link to='/page/payment' disabled={price == 0} onClick={setForPayment} className="btn-accent btn">Pay</Link>
                         <button onClick={() => deletecart(_id)} className="btn-error text-white btn p-0">Remove</button>
                     </div>

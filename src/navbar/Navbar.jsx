@@ -1,11 +1,18 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { FaShoppingCart } from "react-icons/fa";
 
 const Navbar = () => {
 
-  const { user, logOut, myCart } = useContext(AuthContext);
+  const { user, logOut, myCart, setTheme, oho } = useContext(AuthContext);
+  const [toggle, setToggle] = useState(true);
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+    setToggle(!toggle);
+  };
+  
 
   return (
     <div className="relative">
@@ -40,7 +47,7 @@ const Navbar = () => {
               <li><Link to="/page/dashboard">Dashboard</Link></li>
             </ul>
           </div>
-          
+
 
           <Link to="/" className="btn btn-ghost flex items-center text-xl">
             <div>
@@ -49,7 +56,6 @@ const Navbar = () => {
             <div>ISLAH ACADEMY</div>
           </Link>
         </div>
-
 
 
         {/* ---------------------------large screen---------------------------- */}
@@ -76,22 +82,37 @@ const Navbar = () => {
             <li><Link to="/page/dashboard">Dashboard</Link></li>
           </ul>
         </div>
+
         <div className="navbar-end">
-          {user ?
-            <div className="flex justify-between items-center gap-5">
-              <Link to='/page/cart' className="btn btn-success relative">
-                <FaShoppingCart className="w-7 h-7" />
-                <div className="badge badge-primary absolute m-0 p-1 -top-3 -right-2">
-                  {myCart.length || 0}
+
+          <div className="form-control me-1" onClick={toggleTheme} >
+            {
+              toggle ?
+              <span className="text-center text-white text-xs bg-blue-900 rounded-md p-1">Dark<br />Theme</span> :
+              <span className="text-center text-black text-xs bg-white rounded-md p-1">Light<br />Theme</span>
+            }
+          </div>
+          
+          {
+            user ?
+              <div className="flex justify-between items-center gap-1 sm:gap-5">
+                {
+                  oho?.phoneNumber === null &&
+                  <Link to='/page/dashboard' className="btn btn-success relative">
+                    <FaShoppingCart className="w-8 h-8" />
+                    <div className="badge badge-primary absolute m-0 p-1 -top-3 -right-2">
+                      {myCart.length || 0}
+                    </div>
+                  </Link>
+                }
+                <div className="btn flex" onClick={logOut}>
+                  <div className="tooltip tooltip-bottom" data-tip={user.displayName}>
+                    <img src={user.photoURL} className="w-8 rounded h-8" alt={user.displayName} />
+                  </div>LogOut
                 </div>
-              </Link>
-              <div className="btn flex" onClick={logOut}>
-                <div className="tooltip tooltip-bottom" data-tip={user.displayName}>
-                  <img src={user.photoURL} className="w-8 rounded h-8" alt={user.displayName} />
-                </div>LogOut
-              </div>
-            </div> :
-            <Link to="/page/login" className="btn">Login</Link>}
+              </div> :
+              <Link to="/page/login" className="btn">Login</Link>
+          }
         </div>
       </div>
     </div>

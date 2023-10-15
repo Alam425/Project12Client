@@ -12,7 +12,7 @@ const InstructorDetails = () => {
         <div className="mx-5 text-center ">
           <img src={image} alt={name} className="max-w-sm rounded-lg mx-auto" />
           <div>
-            <h1 className="text-4xl text-amber-600 font-bold">{name}</h1>
+            <h1 className="text-4xl text-amber-700 font-bold">{name}</h1>
             <p className="text-lg p-2 text-amber-500 font-semibold">Email: <Link href={`mailto:${email}`} target="_blank" className="underline text-amber-700" >{email}</Link></p>
           </div>
         </div>

@@ -8,20 +8,25 @@ import OurSpecialities from './specialities/OurSpecialities';
 import Review from './Review/Review';
 import SpecialBundleCourses from './SpecialBundleCourses/SpecialBundleCourses';
 import PopularInstructors from './PopularInstructors/PopularInstructors';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import { AuthContext } from '../AuthProvider/AuthProvider';
 
 
 function App() {
 
+  const { theme } = useContext(AuthContext);
+  
   useEffect(() => {
     window.history.scrollRestoration = 'auto';
   }, []);
 
+  const dynamicClassName = `${theme}`;
 
   return (
-    <div className='bg-slate-100'>
+    <div className={dynamicClassName}>
       <Navbar />
       <Top />
+      
       <Outlet />
       <SpecialBundleCourses />
       <PopularInstructors />
