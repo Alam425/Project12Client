@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
+import { Link } from 'react-router-dom';
 
 const Classes = ({ i, index }) => {
 
     const { name, price, category, image, status, feedback } = i;
 
-    const dynamicClass = `font-bold text-lg uppercase ${status === 'approved' && 'text-green-500' } ${status === 'denied' && 'text-red-500' } ${status === 'pending' && 'text-yellow-500' }`;
+    const dynamicClass = `font-bold text-lg uppercase ${status === 'approved' && 'text-green-500'} ${status === 'denied' && 'text-red-500'} ${status === 'pending' && 'text-yellow-500'}`;
 
     return (
         <div className='grid grid-cols-12 justify-around items-center gap-2 p-5 m-5'>
@@ -40,12 +42,9 @@ const Classes = ({ i, index }) => {
             <div className='sm:col-span-3 flex col-span-4 justify-between gap-3 items-center'>
                 {
                     status === 'denied' &&
-                    <div className='btn w-full'>
-                        Update
-                    </div>
+                    <Link to='/page/'><div className='btn w-full' >Update</div></Link>
                 }
             </div>
-
 
         </div>
     );

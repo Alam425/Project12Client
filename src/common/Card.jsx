@@ -4,9 +4,9 @@ import Swal from "sweetalert2";
 
 const Card = ({ it }) => {
 
-    let { name, image, instructorName, availableSeats, price } = it;
+    const { addToCart, noSeat, setNoSeat, user, oho } = useContext(AuthContext);
     
-    const { addToCart, noSeat, setNoSeat, user, oho, status } = useContext(AuthContext);
+    let { name, image, instructorName, availableSeats, status, price } = it;
     
     if(status === 'denied' || status === "pending"){
         return;

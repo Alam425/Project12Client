@@ -30,6 +30,8 @@ import Success from './Dashboard/Payment/Success';
 import Courses from './Dashboard/user/Courses';
 import AllItemInCart from './Dashboard/Cart/AllItemInCart';
 import Instructors from './HomepageInstructors/Instructors';
+import UpdateAClass from './Dashboard/Instructor/UpdateAClass';
+import AdminOnly from './Private/AdminOnly';
 
 const router = createBrowserRouter([
   {
@@ -93,16 +95,13 @@ const router = createBrowserRouter([
     }, {
       path: "/page/success",
       element: <Private><Success /></Private>
-      // }, {
-      //   path: "/page/cart",
-      //   element: <Private><AllItemInCart /></Private>
-      // }, {
-      //   path: "/page/courses",
-      //   element: <Private><Courses/></Private>
-    }, {
-      path: "/page/instructors",
-      element: <Instructors></Instructors>
-    }]
+      }, {
+        path: "/page/instructors",
+        element: <Instructors></Instructors>
+      }, {
+        path: "/page/addClass",
+        element: <Private><AdminOnly><UpdateAClass /></AdminOnly></Private>
+      }]
   }, {
     path: "*",
     element: <Error />

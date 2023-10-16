@@ -170,6 +170,7 @@ const AuthProvider = ({ children }) => {
             })
     }
 
+
     const removeFromClass = it => {
         axios.delete(`http://localhost:3000/class/${it._id}`)
             .then(data => {
