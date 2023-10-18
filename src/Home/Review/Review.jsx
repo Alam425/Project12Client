@@ -7,12 +7,12 @@ const Review = () => {
     const { review } = useContext(AuthContext);
     return (
         <>
-        <SectionTitle down={"শিক্ষার্থীদের রিভিউ"}></SectionTitle>
-        <div className="grid grid-cols-1 md:grid-cols-3">
-            {
-                review.map(i => <Revieww key={i.serial} i={i}></Revieww>)
-            }
-        </div>
+            <SectionTitle down={"শিক্ষার্থীদের রিভিউ"}></SectionTitle>
+            <div className="grid grid-cols-1 md:grid-cols-3">
+                {
+                    review.map(i => <Revieww key={i.serial} i={i}></Revieww>)
+                }
+            </div>
         </>
     );
 };

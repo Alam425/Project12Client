@@ -16,10 +16,9 @@ const Instructor = ({ i }) => {
                 <p className="my-1 text-sm font-semibold text-red-700 ">{email}</p>
                 <p className="my-1 text-md font-semibold text-orange-500">Classes Count : <span className="text-indigo-700">{numberOfClassesTaken}</span></p>
 
-
                 {
                     numberOfClassesTaken !== 0 &&
-                    <button className="underline text-slate-500" onClick={() => showModal(_id)}>Tap to see Classes</button>
+                    <button className="underline text-slate-600" onClick={() => showModal(_id)}>Tap to see Classes</button>
                 }
             </div>
 

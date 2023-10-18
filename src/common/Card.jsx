@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import 'animate.css';
 
 const Card = ({ it }) => {
 
@@ -30,14 +31,14 @@ const Card = ({ it }) => {
         addToCart(ite);
     }
 
-    const dynamicClassName = `grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 items-center p-2 gap-5 m-5 rounded-lg ${!noSeat && "bg-red-500"} bg-gray-200`;
+    const dynamicClassName = `grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 items-center p-2 gap-5 m-7 rounded-lg ${!noSeat && "bg-red-500"} bg-slate-200 animate__animated animate__wobble animate__delay-2s  shadow-lg`;
     
     return (
         <div className={dynamicClassName}>
-            <div className="w-3/4 mx-auto">
-                <img className="w-60 h-40 rounded-md" src={image} alt={name} />
+            <div className="mx-auto">
+                <img className="h-40 rounded-md" src={image} alt={name} />
             </div>
-            <div className="col-span-2 text-slate-700">
+            <div className="col-span-2 text-slate-600">
                 {name && <h2 className="text-md font-semibold">Name: <span className="text-md font-bold text-xl"> {name} </span></h2>}
                 {instructorName && <p className="text-md font-semibold">Instructor's Name : <span className="text-md font-bold text-xl"> {instructorName} </span></p>}
                 <p className="text-md font-semibold">Available Seats : <span className="text-md font-bold text-xl"> {availableSeats} </span></p>

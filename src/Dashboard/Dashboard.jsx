@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import ToBeApproved from "./Admin/ToBeApproved";
-import AllItemInCart from "./Cart/AllItemInCart";
+import AllItemInCart from "./user/Cart/AllItemInCart";
 import AddAClassByInstructor from "./Instructor/AddAClassByInstructor";
 import Instructorsfor from "./Instructor/Instructorsfor";
 import Courses from "./user/Courses";
-import UsersTable from "./user/UsersTable";
+import UsersTable from "./Admin/UsersTable";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import AllPayments from "./user/AllPayments";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -14,7 +14,7 @@ import AllClasses from "./Admin/AllClasses";
 const Dashboard = () => {
 
     const { oho, allPayments, user } = useContext(AuthContext);
-
+// console.log('oho', oho, 'user', user);
     const coursePurchased = allPayments.filter(i => i?.item?.ite?.instructorEmail === user?.email);
     
 
@@ -27,15 +27,15 @@ const Dashboard = () => {
                 oho?.phoneNumber === "admin" &&
                 <Tabs>
                     <TabList className='rounded-xl p-3 text-2xl font-semibold text-center'>
-                        <Tab>All Classes</Tab>
+                        <Tab>Course Add Requests</Tab>
                         <Tab>Users Management</Tab>
-                        <Tab>Class Add Requests</Tab>
+                        <Tab>All Classes</Tab>
                     </TabList>
 
                     <div className="border-2"></div>
 
                     <TabPanel>
-                        <AllClasses />
+                        <ToBeApproved />
                     </TabPanel>
 
                     <TabPanel>
@@ -43,7 +43,7 @@ const Dashboard = () => {
                     </TabPanel>
 
                     <TabPanel>
-                        <ToBeApproved />
+                        <AllClasses />
                     </TabPanel>
                 </Tabs>
             }
@@ -58,18 +58,18 @@ const Dashboard = () => {
                     <div className="text-2xl text-center divider">Total Students : {coursePurchased.length}</div>
 
                     <TabList className='rounded-xl p-3 text-2xl font-semibold text-center'>
-                        <Tab>Add Class</Tab>
                         <Tab>My Classes</Tab>
+                        <Tab>Add Class</Tab>
                     </TabList>
 
                     <div className="border-2"></div>
 
                     <TabPanel>
-                        <AddAClassByInstructor />
+                        <Instructorsfor />
                     </TabPanel>
 
                     <TabPanel>
-                        <Instructorsfor />
+                        <AddAClassByInstructor />
                     </TabPanel>
                 </Tabs>
             }

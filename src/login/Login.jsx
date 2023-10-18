@@ -39,7 +39,6 @@ const Login = () => {
         loginViaGoogle()
             .then((result) => {
                 const user = result.user;
-                addUserToMongo(user);
                 navigate(from, { replace: true });
                 if (user) {
                     Swal.fire({
@@ -49,6 +48,7 @@ const Login = () => {
                         showConfirmButton: false,
                         timer: 2000
                     })
+                    addUserToMongo(user);
                 }
             }).catch((error) => {
                 console.log(error.message);
@@ -84,7 +84,7 @@ const Login = () => {
                                 </div>
                             </div>
                             <label className="label">
-                                <p className="font-semibold text-slate-700">New here? <Link className="text-lg underline" to='/page/register'>Register Now.</Link></p>
+                                <p className="font-semibold text-slate-600">New here? <Link className="text-lg underline" to='/page/register'>Register Now.</Link></p>
                             </label>
                         </div>
                     </div>

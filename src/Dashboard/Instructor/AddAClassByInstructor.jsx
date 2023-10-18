@@ -74,7 +74,7 @@ const AddAClassByInstructor = () => {
             </select>
           </div>
 
-          <input className="btn btn-accent mx-auto w-full col-span-2" type="submit" value={"Add"} />
+          <input className="btn btn-accent mx-auto w-60 flex justify-center col-span-2" type="submit" value={"Add"} />
 
         </form>
     </div>

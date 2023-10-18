@@ -3,13 +3,13 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, on
 import app from "../../fitebase.config";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
-
     const [myClasses, setMyClasses] = useState([]);
     const [myCartItem, setMyCartItem] = useState([]);
     const [myCart, setMyCart] = useState([]);
@@ -27,6 +27,10 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [amount, setAmount] = useState("");
     const [theme, setTheme] = useState('light');
+
+
+    const queryClient = new QueryClient()
+
 
 
     const registerViaEmail = (email, password) => {
@@ -101,7 +105,8 @@ const AuthProvider = ({ children }) => {
 
 
     const addUserToMongo = user => {
-        axios.post('https://assignment12-3fp9d56r0-alam425.vercel.app/users', { user })
+        // axios.post('https://assignment12-3fp9d56r0-alam425.vercel.app/users', { user })
+        axios.post('http://localhost:3000/users', { user })
             .then(function (response) {
                 if (response.data.insertedId) {
                     console.log("Welcome", user.displayName);
@@ -119,7 +124,7 @@ const AuthProvider = ({ children }) => {
         })
             .then(function (response) {
                 if (response.data.insertedId) {
-                    window.location.reload();
+                    Swal.fire('Payment done...')
                 }
             })
             .catch(function (error) {
@@ -172,15 +177,15 @@ const AuthProvider = ({ children }) => {
 
 
     const removeFromClass = it => {
-        axios.delete(`http://localhost:3000/class/${it._id}`)
+        axios.put(`http://localhost:3000/class/remove/${it._id}`, { it })
             .then(data => {
-                console.log(data);
-                if (data.data.deletedCount > 0) {
-                    Swal.fire(it.name, 'has been deleted')
+                console.log(data.data);
+                if (data.data.modifiedCount > 0) {
+                    Swal.fire(it.name, 'has been updated.')
                 }
                 window.location.reload();
             })
-            .catch(d => console.log(d.message))
+            .catch(r => console.log(r.message))
     }
 
 
@@ -305,9 +310,11 @@ const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={info}>
-            {children}
-        </AuthContext.Provider>
+        <QueryClientProvider client={queryClient}>
+            <AuthContext.Provider value={info}>
+                {children}
+            </AuthContext.Provider>
+        </QueryClientProvider>
     );
 };
 

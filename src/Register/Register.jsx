@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 
 const Register = () => {
@@ -18,14 +19,20 @@ const Register = () => {
     const [error4, setError4] = useState("");
 
 
-    const formSubmitted = (e) => {
+    const formSubmitted = async (e) => {
         e.preventDefault();
         const name = e.target.name.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
         const confirmPassword = e.target.confirmPassword.value;
-        const photo = e.target.photo.value;
 
+        const photo = e.target.photo.files[0];
+        const formdata = new FormData();
+        formdata.append('image', photo);
+        const response = await axios.post(`https://api.imgbb.com/1/upload?key=${encodeURIComponent(import.meta.env.VITE_IMAGE_TOKEN)}`, formdata);
+
+        const imageUrl = response?.data?.data?.display_url;
+        
         if (password.length < 6) {
             setError("Password Must Contain More Than 5 Characters");
             return;
@@ -53,7 +60,7 @@ const Register = () => {
         createUserWithEmailAndPassword(auth, email, confirmPassword)
             .then(result => {
                 updateProfile(auth.currentUser, {
-                    photoURL: photo, displayName: name,
+                    photoURL: imageUrl, displayName: name,
                 }
                 )
                     .then(() => {
@@ -67,6 +74,7 @@ const Register = () => {
                                 timer: 3000
                             })
                         }
+                        console.log(result?.user);
                     })
                     .catch((e) => {
                         if (e?.message) {
@@ -111,7 +119,7 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">PhotoURL</span>
                             </label>
-                            <input type="text" name="photo" className="input input-bordered" />
+                            <input type="file" name="photo" className="file-input file-input-bordered file-input-sm" />
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -150,7 +158,7 @@ const Register = () => {
                             </div>
                         </div>
                         <label className="label">
-                            <p className="font-semibold text-slate-700">Already have an account? <Link className="text-lg underline" to='/page/login'>Login Now.</Link></p>
+                            <p className="font-semibold text-slate-600">Already have an account? <Link className="text-lg underline" to='/page/login'>Login Now.</Link></p>
                         </label>
                         <h3 className="text-red-600 text-xl text-center font-semibold">{error || error2 || error3 || error4}</h3>
                     </div>

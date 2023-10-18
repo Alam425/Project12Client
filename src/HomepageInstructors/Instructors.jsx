@@ -10,13 +10,14 @@ const Instructors = () => {
     
     return (
         <div>
-            <div className="pt-20 m-5">
+            <div className="m-5 pt-10">
+                <SectionTitle down={'Admin Panel'}></SectionTitle>
                 <div className="sm:card-side lg:grid lg:grid-cols-4 lg:items-center shadow-xl border-2 border-slate-300 rounded-2xl m-5 p-5">
-                    <figure>
-                        <img className="w-80 mx-auto" src="https://aslafacademy.com/wp-content/uploads/2020/05/male-avatar-01-2.png" alt="Album" />
-                        <h2 className="text-3xl text-slate-800 font-bold text-center">Abu Nawwar</h2>
+                    <div>
+                        <img className="rounded-md w-80 mx-auto" src="https://aslafacademy.com/wp-content/uploads/2020/05/male-avatar-01-2.png" alt="Album" />
+                        <h2 className="text-3xl text-slate-600 font-bold text-center">Abu Nawwar</h2>
                         <h2 className="text-md text-red-800 font-bold text-center">Founder & Director</h2>
-                    </figure>
+                    </div>
                     <div className="card-body lg:col-span-3">
                         <h2 className="card-title text-4xl font-bold text-red-800">About the Founder</h2>
                         <p>He is honourable Founder and Director of Aslaf Academy.
@@ -32,11 +33,11 @@ const Instructors = () => {
                     </div>
                 </div>
                 <div className="sm:card-side lg:grid lg:grid-cols-4 lg:items-center shadow-xl border-2 border-slate-300 rounded-2xl m-5 p-5">
-                    <figure>
-                        <img className="w-80 mx-auto" src="https://aslafacademy.com/wp-content/uploads/2021/03/avatar-f-01-1890x2048.png" alt="Album" />
-                        <h2 className="text-3xl text-slate-800 font-bold text-center">Zainab Al-Gazi</h2>
+                    <div>
+                        <img className="rounded-md w-80 mx-auto" src="https://aslafacademy.com/wp-content/uploads/2021/03/avatar-f-01-1890x2048.png" alt="Album" />
+                        <h2 className="text-3xl text-slate-600 font-bold text-center">Zainab Al-Gazi</h2>
                         <h2 className="text-md text-red-800 font-bold text-center">Principal</h2>
-                    </figure>
+                    </div>
                     <div className="card-body lg:col-span-3">
                         <h2 className="card-title text-4xl font-bold text-red-800">About the Principal</h2>
                         <p>She is honourable Principle of Aslaf Academy.<br /><br />

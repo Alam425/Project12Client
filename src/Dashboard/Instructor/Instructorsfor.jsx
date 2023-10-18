@@ -10,7 +10,7 @@ const Instructorsfor = () => {
 
     return (
         <div className="">
-            {
+            {   
                 myClasses.map((i, index) => <Classes i={i} index={index} key={i._id} ></Classes>)
             }
         </div>

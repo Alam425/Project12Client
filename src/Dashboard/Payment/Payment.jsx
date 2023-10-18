@@ -2,7 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import Success from './Success';
 
 
 const Payment = () => {
@@ -10,12 +10,10 @@ const Payment = () => {
     const stripe = useStripe();
     const elements = useElements();
     const { amount, user, myCartItem, addToPurchasedCourses } = useContext(AuthContext);
-    const navigate = useNavigate();
     const price = amount;
     const [clientSecret, setClientSecret] = useState("");
+    const [success, setSuccess] = useState(false);
     const [processing, setProcessing] = useState(false);
-
-    console.log(amount);
 
     useEffect(() => {
         if (price > 0) {
@@ -96,13 +94,15 @@ const Payment = () => {
                 .catch(r => console.log(r))
         }
         addToPurchasedCourses();
-        navigate('/page/success');
+        setSuccess(true);
     }
 
 
     return (
         <div>
-            <form className="w-3/4 mx-auto" onSubmit={handlePayment}>
+            {
+                !success &&
+                <form className="w-3/4 mx-auto" onSubmit={handlePayment}>
                 <CardElement
                     options={{
                         style: {
@@ -126,6 +126,11 @@ const Payment = () => {
                     <p className="mx-auto w-11/12 text-2xl text-red-600 p-2 border-red-600 border-4">{cardError}</p>
                 }
             </form>
+            }
+            {
+                success &&
+                <Success/>
+            }
         </div>
     );
 

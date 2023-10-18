@@ -26,9 +26,9 @@ const Navbar = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
               </svg>
             </label>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-2 z-[1] p-2 shadow bg-slate-600 rounded-box w-72">
+            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-2 z-[1] p-2 shadow bg-slate-800 rounded-box w-72">
               <li><Link to="/" >Home</Link></li>
-              <li><Link>Classes</Link>
+              <li>Classes 
                 <ul className="p-2">
                   <li><Link to="/fiqh">Fiqh</Link></li>
                   <li><Link to="/Hadith">Hadith</Link></li>

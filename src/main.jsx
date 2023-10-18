@@ -27,11 +27,7 @@ import Dashboard from './Dashboard/Dashboard';
 import Page from './Page/Page';
 import PaymentGateway from './Dashboard/Payment/PaymentGateway';
 import Success from './Dashboard/Payment/Success';
-import Courses from './Dashboard/user/Courses';
-import AllItemInCart from './Dashboard/Cart/AllItemInCart';
 import Instructors from './HomepageInstructors/Instructors';
-import UpdateAClass from './Dashboard/Instructor/UpdateAClass';
-import AdminOnly from './Private/AdminOnly';
 
 const router = createBrowserRouter([
   {
@@ -93,15 +89,9 @@ const router = createBrowserRouter([
       path: "/page/payment",
       element: <Private><PaymentGateway /></Private>
     }, {
-      path: "/page/success",
-      element: <Private><Success /></Private>
-      }, {
-        path: "/page/instructors",
-        element: <Instructors></Instructors>
-      }, {
-        path: "/page/addClass",
-        element: <Private><AdminOnly><UpdateAClass /></AdminOnly></Private>
-      }]
+      path: "/page/instructors",
+      element: <Instructors></Instructors>
+    }]
   }, {
     path: "*",
     element: <Error />

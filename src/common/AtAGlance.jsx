@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import 'animate.css';
 
 const AtAGlance = ({ i }) => {
 
@@ -29,16 +29,16 @@ const AtAGlance = ({ i }) => {
     }
 
     return (
-        <div className="">
-            <div className="rounded-box p-5 border-2 border-slate-500 w-full h-full">
+        <div className="animate__animated animate__flip">
+            <div className="rounded-box p-5 border-2 border-slate-600 w-full h-full">
                 <div className="grid grid-cols-1">
                     <img className="w-80 h-52 rounded-xl mx-auto" src={image} alt={name} />
                     <p className="text-2xl font-bold text-pink-600 mt-3">{name}</p>
                     <div className="lg:grid-cols-2 grid grid-cols-1 gap-5 justify-between items-center">
 
                         <div className="flex gap-5 items-center justify-stretch">
-                            <p className="text-lg font-semibold text-slate-600">Hadiya : &nbsp;&nbsp;&nbsp;<span className="line-through text-slate-400">{price * 1.6} ৳</span></p>
-                            <p className="text-lg font-bold text-amber-600">{price} ৳</p>
+                            <p className="text-lg font-semibold text-slate-600">Hadiya : &nbsp;&nbsp;&nbsp;<span className="text-lg text-amber-600">{price} ৳</span></p>
+                            <p className="line-through text-slate-400 font-semibold">{price * 1.6} ৳</p>
                         </div>
 
                         <div>
@@ -49,7 +49,7 @@ const AtAGlance = ({ i }) => {
                                         <div className="w-3/4 mx-auto">
                                             <img className="w-full rounded-xl " src={image} alt={name} />
                                         </div>
-                                        <div className=" text-slate-700">
+                                        <div className=" text-slate-600">
                                             <h2 className="text-md font-semibold">Name: <span className="text-md font-bold text-xl"> {name} </span></h2>
                                             <p className="text-md font-semibold">Instructors Name : <span className="text-md font-bold text-xl"> {instructorName} </span></p>
                                             <p className="text-md font-semibold">Available Seats : <span className="text-md font-bold text-xl"> {availableSeats} </span></p>

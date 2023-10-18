@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
     return (
         <div className='w-full'>
-            <footer className="grid items-center grid-cols-1 md:grid-cols-4 gap-10 p-10 bg-slate-800">
+            <footer className="grid items-center grid-cols-1 md:grid-cols-4 gap-7 p-10 bg-slate-800">
                 <div>
                     <p className="text-xl font-medium border-b-2 mb-1 text-white">Useful Links</p><br />
                     <Link to='/' className="text-lg text-white">About Us</Link><br />
@@ -14,7 +14,7 @@ const Footer = () => {
                     <Link to='/' className="text-lg text-white">Privacy Policy</Link><br />
                 </div>
 
-                <div className="md:col-span-2 m-5 my-10">
+                <div className="md:col-span-2 my-10">
                     <p className="text-xl font-medium text-white">ISLAH ACADEMY is the leading eLearning platform for Islamic Online Courses in Bangladesh. Our online courses are designed in collaboration with the best Islamic scholars and experts of each field from all over the world.</p><br />
                     <div className="flex gap-5 items-center mt-0 justify-items-center text-slate-100">
                         <div className="tooltip text-xl bg-blue-600 h-7 p-1 rounded" data-tip="Facebook">
@@ -49,7 +49,7 @@ const Footer = () => {
                 </div>
             </footer>
 
-            <footer className="py-1 text-center bg-slate-300 text-slate-700 border-base-300">
+            <footer className="py-1 text-center bg-slate-300 text-slate-600 border-base-300">
                 <p className="text-xl text-center font-semibold">ISLAH ACADEMY || DEVELOPED BY : SHAMS</p>
             </footer>
         </div>

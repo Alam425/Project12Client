@@ -42,7 +42,7 @@ const ApproveClass = ({ it, index }) => {
                 <img className="w-60 h-40 rounded-md " src={image} alt={name} />
             </div>
 
-            <div className="col-span-8 sm:col-span-6 text-slate-700">
+            <div className="col-span-8 sm:col-span-6 text-slate-600">
                 {name && <h2 className="text-md font-semibold">Name: <span className="text-md font-bold text-xl"> {name} </span></h2>}
                 {instructorName && <p className="text-md font-semibold">Instructors Name : <span className="text-md font-bold text-xl"> {instructorName} </span></p>}
                 <p className="text-md font-semibold">Available Seats : <span className="text-md font-bold text-xl"> {availableSeats} </span></p>
