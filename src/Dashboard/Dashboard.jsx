@@ -14,7 +14,7 @@ import AllClasses from "./Admin/AllClasses";
 const Dashboard = () => {
 
     const { oho, allPayments, user } = useContext(AuthContext);
-// console.log('oho', oho, 'user', user);
+    
     const coursePurchased = allPayments.filter(i => i?.item?.ite?.instructorEmail === user?.email);
     
 

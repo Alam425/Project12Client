@@ -17,7 +17,7 @@ const Payment = () => {
 
     useEffect(() => {
         if (price > 0) {
-            fetch("http://localhost:3000/intentToPayment", {
+            fetch("https://assignment12-491jyiemq-alam425.vercel.app/intentToPayment", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ price }),
@@ -85,7 +85,7 @@ const Payment = () => {
                 itemName: myCartItem?.ite?.name,
             }
 
-            axios.post('http://localhost:3000/payments', payment)
+            axios.post('https://assignment12-491jyiemq-alam425.vercel.app/payments', payment)
                 .then(res => {
                     if (res.data.deletedCount > 0) {
                         console.log(res.data);

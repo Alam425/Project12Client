@@ -64,7 +64,7 @@ const AuthProvider = ({ children }) => {
     const addToCart = ite => {
 
         const userEmail = user?.providerData[0]?.email;
-        axios.post(`http://localhost:3000/cart/${user.email}`, { ite, userEmail }, {
+        axios.post(`https://assignment12-491jyiemq-alam425.vercel.app/cart/${user.email}`, { ite, userEmail }, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('access')}`
             }
@@ -72,7 +72,7 @@ const AuthProvider = ({ children }) => {
             .then(function (response) {
                 console.log(response.data);
                 if (response?.data?.insertedId) {
-                    axios.put(`http://localhost:3000/class/availableSeats/${ite._id}`)
+                    axios.put(`https://assignment12-491jyiemq-alam425.vercel.app/class/availableSeats/${ite._id}`)
                         .then(response => {
                             if (response.data.modifiedCount > 0) {
                                 Swal.fire({
@@ -106,10 +106,10 @@ const AuthProvider = ({ children }) => {
 
 
     const deleteFromCart = id => {
-        axios.delete(`http://localhost:3000/cart/${id}`)
+        axios.delete(`https://assignment12-491jyiemq-alam425.vercel.app/cart/${id}`)
                         .then(data => {
                             if (data?.data?.deletedCount > 0) {
-                                axios.put(`http://localhost:3000/class/availableSeatsIncrease/${_id}`)
+                                axios.put(`https://assignment12-491jyiemq-alam425.vercel.app/class/availableSeatsIncrease/${_id}`)
                                     .then(response => {
                                         console.log(response.data);
                                         if (response.data.modifiedCount > 0) {
@@ -127,7 +127,7 @@ const AuthProvider = ({ children }) => {
 
 
     const addUserToMongo = user => {
-        axios.post('http://localhost:3000/users', { user })
+        axios.post('https://assignment12-491jyiemq-alam425.vercel.app/users', { user })
             .then(function (response) {
                 if (response.data.insertedId) {
                     console.log("Welcome", user.displayName);
@@ -140,7 +140,7 @@ const AuthProvider = ({ children }) => {
 
 
     const addToPurchasedCourses = () => {
-        axios.post('http://localhost:3000/courses', { myCartItem })
+        axios.post('https://assignment12-491jyiemq-alam425.vercel.app/courses', { myCartItem })
             .then(function (response) {
                 if (response.data.insertedId) {
                     Swal.fire('Payment done...')
@@ -154,7 +154,7 @@ const AuthProvider = ({ children }) => {
 
     const addClassToMongo = (obj) => {
         const status = "pending";
-        axios.post('http://localhost:3000/class', { ...obj, status })
+        axios.post('https://assignment12-491jyiemq-alam425.vercel.app/class', { ...obj, status })
             .then(function (response) {
                 if (response.data.insertedId) {
                     console.log(response.data);
@@ -168,7 +168,7 @@ const AuthProvider = ({ children }) => {
 
 
     const approvePendingClass = item => {
-        axios.patch(`http://localhost:3000/class/${item?._id}`)
+        axios.patch(`https://assignment12-491jyiemq-alam425.vercel.app/class/${item?._id}`)
             .then((data) => {
                 if (data.data.modifiedCount) {
                     Swal.fire(item.name, "has been updated");
@@ -182,7 +182,7 @@ const AuthProvider = ({ children }) => {
 
 
     const proceedWithFeedback = hi => {
-        axios.put(`http://localhost:3000/class/${hi?._id}`, { hi })
+        axios.put(`https://assignment12-491jyiemq-alam425.vercel.app/class/${hi?._id}`, { hi })
             .then(r => {
                 console.log(r.data);
                 window.location.reload();
@@ -194,7 +194,7 @@ const AuthProvider = ({ children }) => {
 
 
     const removeFromClass = it => {
-        axios.put(`http://localhost:3000/class/remove/${it._id}`, { it })
+        axios.put(`https://assignment12-491jyiemq-alam425.vercel.app/class/remove/${it._id}`, { it })
             .then(data => {
                 console.log(data.data);
                 if (data.data.modifiedCount > 0) {
@@ -212,7 +212,7 @@ const AuthProvider = ({ children }) => {
             setUser(currentUser);
             if (currentUser) {
                 let email = currentUser?.email;
-                axios.post(`http://localhost:3000/jwt`, { email })
+                axios.post(`https://assignment12-491jyiemq-alam425.vercel.app/jwt`, { email })
                     .then(data => {
                         localStorage.setItem('access', data?.data?.token);
                         console.log(data.data);
@@ -229,7 +229,7 @@ const AuthProvider = ({ children }) => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:3000/myClass/${user?.email}`)
+        fetch(`https://assignment12-491jyiemq-alam425.vercel.app/myClass/${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 setMyClasses(data)
@@ -238,7 +238,7 @@ const AuthProvider = ({ children }) => {
 
 
     useEffect(() => {
-        fetch("http://localhost:3000/class")
+        fetch("https://assignment12-491jyiemq-alam425.vercel.app/class")
             .then(res => res.json())
             .then(data => {
                 setItem(data);
@@ -247,7 +247,7 @@ const AuthProvider = ({ children }) => {
 
 
     useEffect(() => {
-        fetch("https://assignment12-3fp9d56r0-alam425.vercel.app/instructor")
+        fetch("https://assignment12-491jyiemq-alam425.vercel.app/instructor")
             .then(res => res.json())
             .then(data => {
                 setInstructors(data);
@@ -256,7 +256,7 @@ const AuthProvider = ({ children }) => {
 
 
     useEffect(() => {
-        fetch("https://assignment12-3fp9d56r0-alam425.vercel.app/specialities")
+        fetch("https://assignment12-491jyiemq-alam425.vercel.app/specialities")
             .then(res => res.json())
             .then(data => {
                 setSpecialities(data);
@@ -265,7 +265,7 @@ const AuthProvider = ({ children }) => {
 
 
     useEffect(() => {
-        fetch("https://assignment12-3fp9d56r0-alam425.vercel.app/reviews")
+        fetch("https://assignment12-491jyiemq-alam425.vercel.app/reviews")
             .then(res => res.json())
             .then(data => {
                 setReview(data);
@@ -274,7 +274,7 @@ const AuthProvider = ({ children }) => {
 
 
     useEffect(() => {
-        fetch("https://assignment12-3fp9d56r0-alam425.vercel.app/users")
+        fetch("https://assignment12-491jyiemq-alam425.vercel.app/users")
             .then(res => res.json())
             .then(data => {
                 setAllusers(data);
@@ -286,7 +286,7 @@ const AuthProvider = ({ children }) => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:3000/payments/${user?.email}`)
+        fetch(`https://assignment12-491jyiemq-alam425.vercel.app/payments/${user?.email}`)
             .then(res => res.json())
             .then(data => {
                 setPayments(data);
@@ -295,14 +295,14 @@ const AuthProvider = ({ children }) => {
 
 
     useEffect(() => {
-        axios.get('http://localhost:3000/payments')
+        axios.get('https://assignment12-491jyiemq-alam425.vercel.app/payments')
             .then(data => setAllPayments(data.data))
             .catch(e => console.log(e.message))
     }, [])
 
 
     useEffect(() => {
-        fetch("http://localhost:3000/cart", {
+        fetch("https://assignment12-491jyiemq-alam425.vercel.app/cart", {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('access')}`
             }
@@ -315,7 +315,7 @@ const AuthProvider = ({ children }) => {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/cart/${user?.email}`, {
+        axios.get(`https://assignment12-491jyiemq-alam425.vercel.app/cart/${user?.email}`, {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('access')}`
             }})
@@ -327,7 +327,7 @@ const AuthProvider = ({ children }) => {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/courses/`)
+        axios.get(`https://assignment12-491jyiemq-alam425.vercel.app/courses/`)
             .then(data => {
                 const myCourses = data?.data?.filter(i => i?.myCartItem?.userEmail === user?.email);
                 setCourses(myCourses);

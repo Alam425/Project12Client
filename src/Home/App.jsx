@@ -24,7 +24,7 @@ function App() {
 
   // const classesDataFn = () => {
   //   () => {
-  //     return axios.get("http://localhost:3000/class")
+  //     return axios.get("https://assignment12-491jyiemq-alam425.vercel.app/class")
   //   }
   // }
 

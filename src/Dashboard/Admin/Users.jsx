@@ -17,7 +17,7 @@ const Users = ({ users, index }) => {
         })
             .then((result) => {
                 if (result.isConfirmed) {
-                    axios.patch(`http://localhost:3000/users/${id}`, {
+                    axios.patch(`https://assignment12-491jyiemq-alam425.vercel.app/users/${id}`, {
                         users
                     })
                         .then(data => {
@@ -44,7 +44,7 @@ const Users = ({ users, index }) => {
         })
             .then((result) => {
                 if (result.isConfirmed) {
-                    axios.patch(`http://localhost:3000/users/student/${id}`)
+                    axios.patch(`https://assignment12-491jyiemq-alam425.vercel.app/users/student/${id}`)
                         .then(data => {
                             console.log(data?.data);
                             if (data?.data?.modifiedCount > 0) {
@@ -69,7 +69,7 @@ const Users = ({ users, index }) => {
         })
             .then((result) => {
                 if (result.isConfirmed) {
-                    axios.patch(`http://localhost:3000/users/instructor/${id}`)
+                    axios.patch(`https://assignment12-491jyiemq-alam425.vercel.app/users/instructor/${id}`)
                         .then(data => {
                             console.log(data?.data);
                             if (data?.data?.modifiedCount > 0) {
@@ -94,7 +94,7 @@ const Users = ({ users, index }) => {
         })
             .then((result) => {
                 if (result.isConfirmed) {
-                    axios.delete(`https://assignment12-3fp9d56r0-alam425.vercel.app/users/${id}`)
+                    axios.delete(`https://assignment12-491jyiemq-alam425.vercel.app/users/${id}`)
                         .then(data => {
                             if (data?.data?.deletedCount > 0) {
                                 Swal.fire(

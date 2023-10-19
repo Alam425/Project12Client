@@ -81,7 +81,7 @@ const router = createBrowserRouter([
     }, {
       path: "/page/tutor/:_id",
       element: <InstructorDetails />,
-      loader: ({ params }) => fetch(`https://assignment12-3fp9d56r0-alam425.vercel.app/tutor/${params._id}`)
+      loader: ({ params }) => fetch(`https://assignment12-491jyiemq-alam425.vercel.app/tutor/${params._id}`)
     }, {
       path: "/page/dashboard",
       element: <Private><Dashboard /></Private>
