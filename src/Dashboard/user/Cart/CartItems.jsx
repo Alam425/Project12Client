@@ -8,7 +8,7 @@ const CartItems = ({ i, index }) => {
 
     const { image, name, price, _id } = i?.ite;
 
-    const { setMyCartItem, setAmount } = useContext(AuthContext);
+    const { setMyCartItem, setAmount, deleteFromCart } = useContext(AuthContext);
 
     const setForPayment = () => {
         setMyCartItem(i);
@@ -26,24 +26,7 @@ const CartItems = ({ i, index }) => {
         })
             .then((result) => {
                 if (result.isConfirmed) {
-                    // axios.delete(`https://assignment12-3fp9d56r0-alam425.vercel.app/cart/${id}`)
-                    axios.delete(`http://localhost:3000/cart/${id}`)
-                        .then(data => {
-                            if (data?.data?.deletedCount > 0) {
-                                axios.put(`http://localhost:3000/class/availableSeatsIncrease/${_id}`)
-                                    .then(response => {
-                                        console.log(response.data);
-                                        if (response.data.modifiedCount > 0) {
-                                            window.location.reload();
-                                            Swal.fire(`${name} has been removed successfully...`)
-                                        }
-                                    })
-                                    .catch((error) => {
-                                        console.error(error.message);
-                                    });
-                            }
-                        })
-                        .catch(r => console.log(r.message))
+                    deleteFromCart(_id)
                 }
             })
     }

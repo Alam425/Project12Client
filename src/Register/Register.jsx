@@ -13,6 +13,7 @@ const Register = () => {
     const { auth, addUserToMongo } = useContext(AuthContext);
     const [see, setSee] = useState(false);
     const [se, setSe] = useState(false);
+    const [no, setNo] = useState(false);
     const [error, setError] = useState("");
     const [error2, setError2] = useState("");
     const [error3, setError3] = useState("");
@@ -21,18 +22,29 @@ const Register = () => {
 
     const formSubmitted = async (e) => {
         e.preventDefault();
+        setNo(true);
+        Swal.fire({
+            title: 'Please wait...',
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            }
+          })
+          
         const name = e.target.name.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
         const confirmPassword = e.target.confirmPassword.value;
 
-        const photo = e.target.photo.files[0];
+        const photo = e?.target?.photo?.files[0];
         const formdata = new FormData();
         formdata.append('image', photo);
         const response = await axios.post(`https://api.imgbb.com/1/upload?key=${encodeURIComponent(import.meta.env.VITE_IMAGE_TOKEN)}`, formdata);
 
         const imageUrl = response?.data?.data?.display_url;
-        
+
         if (password.length < 6) {
             setError("Password Must Contain More Than 5 Characters");
             return;
@@ -91,6 +103,7 @@ const Register = () => {
                 navigate('/', { replace: true });
             })
             .catch((e) => {
+                setNo(false);
                 Swal.fire({
                     position: 'top',
                     icon: 'error',
@@ -110,27 +123,19 @@ const Register = () => {
                 <form onSubmit={formSubmitted} className="w-full">
                     <div className="card-body pb-0 mb-0">
                         <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Name</span>
-                            </label>
+                            <label className="label">Name</label>
                             <input type="text" name="name" className="input input-bordered" />
                         </div>
                         <div className="form-control w-full max-w-full">
-                            <label className="label">
-                                <span className="label-text">PhotoURL</span>
-                            </label>
+                            <label className="label">PhotoURL</label>
                             <input type="file" name="photo" className="file-input file-input-bordered file-input-sm" />
                         </div>
                         <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Email</span>
-                            </label>
+                            <label className="label">Email</label>
                             <input type="email" name="email" className="input input-bordered" />
                         </div>
                         <div className="form-control">
-                            <label className="label">
-                                <span className="label-text">Password</span>
-                            </label>
+                            <label className="label">Password</label>
                             <div className="relative">
                                 <div>
                                     <input className="input input-bordered w-full" type={see ? 'text' : 'password'} name="password" id="" />
@@ -143,9 +148,7 @@ const Register = () => {
                             </div>
                         </div>
                         <div className="mt-2 form-control">
-                            <label className="label">
-                                <span className="label-text">Confirm Password</span>
-                            </label>
+                            <label className="label">Confirm Password</label>
                             <div className="relative">
                                 <div>
                                     <input className="input input-bordered w-full" type={se ? 'text' : 'password'} name="confirmPassword" id="" />
@@ -163,7 +166,7 @@ const Register = () => {
                         <h3 className="text-red-600 text-xl text-center font-semibold">{error || error2 || error3 || error4}</h3>
                     </div>
                     <div className="form-control w-full px-8 pb-8 mt-0">
-                        <input type="submit" className="btn btn-primary btn-outline" value="Register" />
+                        <input type="submit" disabled={no === true} className="btn btn-primary btn-outline" value="Register" />
                     </div>
                 </form>
             </div>

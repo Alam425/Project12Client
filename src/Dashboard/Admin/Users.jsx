@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 const Users = ({ users, index }) => {
 
     const { displayName, photoURL, email, _id, phoneNumber } = users;
-    
+
     const makeAdmin = id => {
         Swal.fire({
             title: 'Are you sure?',
@@ -17,7 +17,6 @@ const Users = ({ users, index }) => {
         })
             .then((result) => {
                 if (result.isConfirmed) {
-                    // axios.patch(`https://assignment12-3fp9d56r0-alam425.vercel.app/users/${_id}`)
                     axios.patch(`http://localhost:3000/users/${id}`, {
                         users
                     })
@@ -45,7 +44,6 @@ const Users = ({ users, index }) => {
         })
             .then((result) => {
                 if (result.isConfirmed) {
-                    // axios.patch(`https://assignment12-3fp9d56r0-alam425.vercel.app/users/student/${id}`)
                     axios.patch(`http://localhost:3000/users/student/${id}`)
                         .then(data => {
                             console.log(data?.data);
@@ -71,7 +69,6 @@ const Users = ({ users, index }) => {
         })
             .then((result) => {
                 if (result.isConfirmed) {
-                    // axios.patch(`https://assignment12-3fp9d56r0-alam425.vercel.app/users/instructor/${id}`)
                     axios.patch(`http://localhost:3000/users/instructor/${id}`)
                         .then(data => {
                             console.log(data?.data);
@@ -98,7 +95,6 @@ const Users = ({ users, index }) => {
             .then((result) => {
                 if (result.isConfirmed) {
                     axios.delete(`https://assignment12-3fp9d56r0-alam425.vercel.app/users/${id}`)
-                        // axios.delete(`http://localhost:3000/users/${id}`)
                         .then(data => {
                             if (data?.data?.deletedCount > 0) {
                                 Swal.fire(

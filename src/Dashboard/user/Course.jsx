@@ -13,8 +13,8 @@ const Course = ({ cartItem, index }) => {
 
                 <div className="text-gray-600 font-semibold text-center">{index + 1}.</div>
 
-                <div className="col-span-2 hidden sm:block">
-                    <img src={image} alt={name} className="w-16 h-16 mx-auto rounded-xl" />
+                <div className="col-span-2 hidden sm:block mx-auto">
+                    <img src={image} alt={name} className="h-28 rounded-xl" />
                 </div>
 
                 <div className="col-span-5 sm:col-span-5 text-lg sm:text-2xl text-slate-600 font-bold">{name}</div>

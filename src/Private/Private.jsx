@@ -7,15 +7,17 @@ const Private = ({ children }) => {
     const navigate = useLocation();
     const { user, loading } = useContext(AuthContext);
 
-    if(loading){
-       return <span className="my-16 mx-auto loading loading-dots w-20"></span>
+    if (loading) {
+        return <div className="text-center">
+            <span className="w-20 h-screen loading loading-dots"></span>
+        </div>
     }
 
-    if(user){
+    if (user) {
         return children;
     }
 
-    return <Navigate to="/page/login" state={{ from : navigate }} replace />
+    return <Navigate to="/page/login" state={{ from: navigate }} replace />
 
 };
 

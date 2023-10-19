@@ -32,7 +32,6 @@ const AuthProvider = ({ children }) => {
     const queryClient = new QueryClient()
 
 
-
     const registerViaEmail = (email, password) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password)
@@ -55,6 +54,7 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         signOut(auth).then(() => {
             console.log("successfully signed out");
+            localStorage.removeItem('access');
         }).catch((error) => {
             console.log(error.message);
         });
@@ -64,9 +64,10 @@ const AuthProvider = ({ children }) => {
     const addToCart = ite => {
 
         const userEmail = user?.providerData[0]?.email;
-        // axios.post(`https://assignment12-3fp9d56r0-alam425.vercel.app/cart/${user.email}`, {
-        axios.post(`http://localhost:3000/cart/${user.email}`, {
-            ite, userEmail
+        axios.post(`http://localhost:3000/cart/${user.email}`, { ite, userEmail }, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('access')}`
+            }
         })
             .then(function (response) {
                 console.log(response.data);
@@ -104,8 +105,28 @@ const AuthProvider = ({ children }) => {
     }
 
 
+    const deleteFromCart = id => {
+        axios.delete(`http://localhost:3000/cart/${id}`)
+                        .then(data => {
+                            if (data?.data?.deletedCount > 0) {
+                                axios.put(`http://localhost:3000/class/availableSeatsIncrease/${_id}`)
+                                    .then(response => {
+                                        console.log(response.data);
+                                        if (response.data.modifiedCount > 0) {
+                                            window.location.reload();
+                                            Swal.fire(`${name} has been removed successfully...`)
+                                        }
+                                    })
+                                    .catch((error) => {
+                                        console.error(error.message);
+                                    });
+                            }
+                        })
+                        .catch(r => console.log(r.message))
+    }
+
+
     const addUserToMongo = user => {
-        // axios.post('https://assignment12-3fp9d56r0-alam425.vercel.app/users', { user })
         axios.post('http://localhost:3000/users', { user })
             .then(function (response) {
                 if (response.data.insertedId) {
@@ -119,9 +140,7 @@ const AuthProvider = ({ children }) => {
 
 
     const addToPurchasedCourses = () => {
-        axios.post('http://localhost:3000/courses', {
-            myCartItem
-        })
+        axios.post('http://localhost:3000/courses', { myCartItem })
             .then(function (response) {
                 if (response.data.insertedId) {
                     Swal.fire('Payment done...')
@@ -149,7 +168,6 @@ const AuthProvider = ({ children }) => {
 
 
     const approvePendingClass = item => {
-
         axios.patch(`http://localhost:3000/class/${item?._id}`)
             .then((data) => {
                 if (data.data.modifiedCount) {
@@ -164,7 +182,6 @@ const AuthProvider = ({ children }) => {
 
 
     const proceedWithFeedback = hi => {
-
         axios.put(`http://localhost:3000/class/${hi?._id}`, { hi })
             .then(r => {
                 console.log(r.data);
@@ -193,6 +210,17 @@ const AuthProvider = ({ children }) => {
         const userChange = onAuthStateChanged(auth, currentUser => {
             setLoading(false);
             setUser(currentUser);
+            if (currentUser) {
+                let email = currentUser?.email;
+                axios.post(`http://localhost:3000/jwt`, { email })
+                    .then(data => {
+                        localStorage.setItem('access', data?.data?.token);
+                        console.log(data.data);
+                    })
+                    .catch((e) => {
+                        console.log(e.message);
+                    })
+            }
         });
         return () => {
             return userChange;
@@ -201,7 +229,6 @@ const AuthProvider = ({ children }) => {
 
 
     useEffect(() => {
-        // fetch("https://assignment12-3fp9d56r0-alam425.vercel.app/class")
         fetch(`http://localhost:3000/myClass/${user?.email}`)
             .then(res => res.json())
             .then(data => {
@@ -211,7 +238,6 @@ const AuthProvider = ({ children }) => {
 
 
     useEffect(() => {
-        // fetch("https://assignment12-3fp9d56r0-alam425.vercel.app/class")
         fetch("http://localhost:3000/class")
             .then(res => res.json())
             .then(data => {
@@ -276,7 +302,11 @@ const AuthProvider = ({ children }) => {
 
 
     useEffect(() => {
-        fetch("http://localhost:3000/cart")
+        fetch("http://localhost:3000/cart", {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('access')}`
+            }
+        })
             .then(res => res.json())
             .then(data => {
                 setCarrt(data);
@@ -285,7 +315,10 @@ const AuthProvider = ({ children }) => {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/cart/${user?.email}`)
+        axios.get(`http://localhost:3000/cart/${user?.email}`, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('access')}`
+            }})
             .then(data => {
                 setMyCart(data?.data);
             })
@@ -306,7 +339,7 @@ const AuthProvider = ({ children }) => {
 
 
     const info = {
-        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, specialities, review, addToCart, addUserToMongo, allusers, carrt, addToPurchasedCourses, courses, noSeat, setNoSeat, amount, setAmount, myCart, setMyCart, myCartItem, setMyCartItem, addClassToMongo, approvePendingClass, myClasses, theme, setTheme, oho, payments, proceedWithFeedback, allPayments, removeFromClass
+        loginViaEmail, loginViaGoogle, registerViaEmail, loading, user, logOut, auth, item, instructors, specialities, review, addToCart, addUserToMongo, allusers, carrt, addToPurchasedCourses, courses, noSeat, setNoSeat, amount, setAmount, myCart, setMyCart, myCartItem, setMyCartItem, addClassToMongo, approvePendingClass, myClasses, theme, setTheme, oho, payments, proceedWithFeedback, allPayments, removeFromClass, deleteFromCart
     }
 
     return (
