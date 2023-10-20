@@ -49,7 +49,7 @@ const Navbar = () => {
           </div>
 
 
-          <Link to="/" className="btn btn-ghost flex items-center text-xl">
+          <Link to="/" className="btn btn-ghost flex items-center text-lg">
             <div>
               <img src="https://i.ibb.co/zGW3dbW/islamic-school-icon-design-vector-1-100x100.jpg" className="rounded w-10 h-10" alt="ISLAMIC-SCHOOL-ICON-DESIGN-VECTOR" />
             </div>

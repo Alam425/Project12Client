@@ -22,16 +22,6 @@ const Register = () => {
 
     const formSubmitted = async (e) => {
         e.preventDefault();
-        setNo(true);
-        Swal.fire({
-            title: 'Please wait...',
-            showClass: {
-              popup: 'animate__animated animate__fadeInDown'
-            },
-            hideClass: {
-              popup: 'animate__animated animate__fadeOutUp'
-            }
-          })
           
         const name = e.target.name.value;
         const email = e.target.email.value;
@@ -71,6 +61,16 @@ const Register = () => {
 
         createUserWithEmailAndPassword(auth, email, confirmPassword)
             .then(result => {
+                setNo(true);
+                Swal.fire({
+                    title: 'Please wait...',
+                    showClass: {
+                      popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                      popup: 'animate__animated animate__fadeOutUp'
+                    }
+                  })
                 updateProfile(auth.currentUser, {
                     photoURL: imageUrl, displayName: name,
                 }
@@ -124,21 +124,21 @@ const Register = () => {
                     <div className="card-body pb-0 mb-0">
                         <div className="form-control">
                             <label className="label">Name</label>
-                            <input type="text" name="name" className="input input-bordered" />
+                            <input required type="text" name="name" className="input input-bordered  bg-white text-black" />
                         </div>
                         <div className="form-control w-full max-w-full">
                             <label className="label">PhotoURL</label>
-                            <input type="file" name="photo" className="file-input file-input-bordered file-input-sm" />
+                            <input required type="file" name="photo" className="file-input file-input-bordered file-input-sm" />
                         </div>
                         <div className="form-control">
                             <label className="label">Email</label>
-                            <input type="email" name="email" className="input input-bordered" />
+                            <input required type="email" name="email" className="input input-bordered  bg-white text-black" />
                         </div>
                         <div className="form-control">
                             <label className="label">Password</label>
                             <div className="relative">
                                 <div>
-                                    <input className="input input-bordered w-full" type={see ? 'text' : 'password'} name="password" id="" />
+                                    <input required className="input input-bordered  bg-white text-black w-full" type={see ? 'text' : 'password'} name="password" id="" />
                                 </div>
                                 <div className="text-xl absolute top-4 right-5" onClick={() => setSee(!see)}>
                                     {
@@ -151,7 +151,7 @@ const Register = () => {
                             <label className="label">Confirm Password</label>
                             <div className="relative">
                                 <div>
-                                    <input className="input input-bordered w-full" type={se ? 'text' : 'password'} name="confirmPassword" id="" />
+                                    <input required className="input input-bordered  bg-white text-black w-full" type={se ? 'text' : 'password'} name="confirmPassword" id="" />
                                 </div>
                                 <div className="text-xl absolute top-4 right-5" onClick={() => setSe(!se)}>
                                     {

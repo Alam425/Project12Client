@@ -67,7 +67,7 @@ const Login = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="text" className="input input-bordered" name="email" />
+                            <input type="text" className="input bg-white text-black input-bordered" name="email" />
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -75,7 +75,7 @@ const Login = () => {
                             </label>
                             <div className="relative">
                                 <div>
-                                    <input className="input input-bordered w-full" type={see ? 'text' : 'password'} name="password" />
+                                    <input className="input bg-white text-black input-bordered w-full" type={see ? 'text' : 'password'} name="password" />
                                 </div>
                                 <div className="text-xl absolute top-4 right-5" onClick={() => setSee(!see)}>
                                     {
