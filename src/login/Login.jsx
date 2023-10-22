@@ -65,17 +65,17 @@ const Login = () => {
                     <div className="card-body">
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Email</span>
+                                <span className="">Email</span>
                             </label>
-                            <input type="text" className="input bg-white text-black input-bordered" name="email" />
+                            <input type="text" className="input bg-white text-black border-slate-600 input-bordered" name="email" />
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Password</span>
+                                <span className="">Password</span>
                             </label>
                             <div className="relative">
                                 <div>
-                                    <input className="input bg-white text-black input-bordered w-full" type={see ? 'text' : 'password'} name="password" />
+                                    <input className="input bg-white text-black border-slate-600 input-bordered w-full" type={see ? 'text' : 'password'} name="password" />
                                 </div>
                                 <div className="text-xl absolute top-4 right-5" onClick={() => setSee(!see)}>
                                     {
@@ -84,12 +84,12 @@ const Login = () => {
                                 </div>
                             </div>
                             <label className="label">
-                                <p className="font-semibold text-slate-600">New here? <Link className="text-lg underline" to='/page/register'>Register Now.</Link></p>
+                                <p className="font-semibold">New here? <Link className="text-lg underline" to='/page/register'>Register Now.</Link></p>
                             </label>
                         </div>
                     </div>
                     <div className="form-control w-full px-8 pb-8">
-                        <input type="submit" className="btn btn-primary btn-outline" value="Login" />
+                        <input type="submit" className="btn btn-accent btn-outline" value="Login" />
                     </div>
                     <div className="mx-8">
 

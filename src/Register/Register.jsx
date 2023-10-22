@@ -19,21 +19,13 @@ const Register = () => {
     const [error3, setError3] = useState("");
     const [error4, setError4] = useState("");
 
-
     const formSubmitted = async (e) => {
         e.preventDefault();
-          
+
         const name = e.target.name.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
         const confirmPassword = e.target.confirmPassword.value;
-
-        const photo = e?.target?.photo?.files[0];
-        const formdata = new FormData();
-        formdata.append('image', photo);
-        const response = await axios.post(`https://api.imgbb.com/1/upload?key=${encodeURIComponent(import.meta.env.VITE_IMAGE_TOKEN)}`, formdata);
-
-        const imageUrl = response?.data?.data?.display_url;
 
         if (password.length < 6) {
             setError("Password Must Contain More Than 5 Characters");
@@ -59,18 +51,32 @@ const Register = () => {
         }
         setError4("");
 
+        const photo = e?.target?.photo?.files[0];
+        const formdata = new FormData();
+        formdata.append('image', photo);
+        const response = await axios.post(`https://api.imgbb.com/1/upload?key=${encodeURIComponent(import.meta.env.VITE_IMAGE_TOKEN)}`, formdata);
+
+        const imageUrl = response?.data?.data?.display_url;
+
+        if (!imageUrl) {
+            setError("Image type not supported");
+        }
+
+        console.log(imageUrl);
+
+        Swal.fire({
+            title: 'Please wait...',
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        })
+        setNo(true);
+
         createUserWithEmailAndPassword(auth, email, confirmPassword)
             .then(result => {
-                setNo(true);
-                Swal.fire({
-                    title: 'Please wait...',
-                    showClass: {
-                      popup: 'animate__animated animate__fadeInDown'
-                    },
-                    hideClass: {
-                      popup: 'animate__animated animate__fadeOutUp'
-                    }
-                  })
                 updateProfile(auth.currentUser, {
                     photoURL: imageUrl, displayName: name,
                 }
@@ -124,21 +130,21 @@ const Register = () => {
                     <div className="card-body pb-0 mb-0">
                         <div className="form-control">
                             <label className="label">Name</label>
-                            <input required type="text" name="name" className="input input-bordered  bg-white text-black" />
+                            <input required type="text" name="name" className="input input-bordered  bg-white text-black border-slate-600" />
                         </div>
                         <div className="form-control w-full max-w-full">
                             <label className="label">PhotoURL</label>
-                            <input required type="file" name="photo" className="file-input file-input-bordered file-input-sm" />
+                            <input required type="file" name="photo" className="bg-white text-black file-input file-input-bordered border-slate-600 file-input-sm" />
                         </div>
                         <div className="form-control">
                             <label className="label">Email</label>
-                            <input required type="email" name="email" className="input input-bordered  bg-white text-black" />
+                            <input required type="email" name="email" className="input input-bordered  bg-white text-black border-slate-600" />
                         </div>
                         <div className="form-control">
                             <label className="label">Password</label>
                             <div className="relative">
                                 <div>
-                                    <input required className="input input-bordered  bg-white text-black w-full" type={see ? 'text' : 'password'} name="password" id="" />
+                                    <input required className="input input-bordered  bg-white text-black border-slate-600 w-full" type={see ? 'text' : 'password'} name="password" id="" />
                                 </div>
                                 <div className="text-xl absolute top-4 right-5" onClick={() => setSee(!see)}>
                                     {
@@ -151,7 +157,7 @@ const Register = () => {
                             <label className="label">Confirm Password</label>
                             <div className="relative">
                                 <div>
-                                    <input required className="input input-bordered  bg-white text-black w-full" type={se ? 'text' : 'password'} name="confirmPassword" id="" />
+                                    <input required className="input input-bordered  bg-white text-black border-slate-600 w-full" type={se ? 'text' : 'password'} name="confirmPassword" id="" />
                                 </div>
                                 <div className="text-xl absolute top-4 right-5" onClick={() => setSe(!se)}>
                                     {
@@ -161,12 +167,12 @@ const Register = () => {
                             </div>
                         </div>
                         <label className="label">
-                            <p className="font-semibold text-slate-600">Already have an account? <Link className="text-lg underline" to='/page/login'>Login Now.</Link></p>
+                            <p className="font-semibold">Already have an account? <Link className="text-lg underline" to='/page/login'>Login Now.</Link></p>
                         </label>
                         <h3 className="text-red-600 text-xl text-center font-semibold">{error || error2 || error3 || error4}</h3>
                     </div>
                     <div className="form-control w-full px-8 pb-8 mt-0">
-                        <input type="submit" disabled={no === true} className="btn btn-primary btn-outline" value="Register" />
+                        <input type="submit" disabled={no === true} className="btn btn-secondary btn-outline" value="Register" />
                     </div>
                 </form>
             </div>

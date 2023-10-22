@@ -8,7 +8,7 @@ const AtAGlance = ({ i }) => {
     const { addToCart, user, oho } = useContext(AuthContext);
 
     const { image, name, price, _id, instructorName, availableSeats } = i;
-
+    
     function showModal() {
         const modalElement = document.getElementById(`${_id}`);
         modalElement.showModal();

@@ -4,8 +4,8 @@ import Swal from "sweetalert2";
 
 const ApproveClass = ({ it, index }) => {
 
-    let { name, image, instructorName, availableSeats, price, status, _id } = it;
-
+    let { name, image, instructorName, availableSeats, price, status, _id, category } = it;
+    
     const { approvePendingClass, proceedWithFeedback } = useContext(AuthContext);
 
     const [hi, setHi] = useState('');
@@ -44,6 +44,7 @@ const ApproveClass = ({ it, index }) => {
 
             <div className="col-span-8 sm:col-span-6 text-slate-600">
                 {name && <h2 className="text-md font-semibold">Name: <span className="text-md font-bold text-xl"> {name} </span></h2>}
+                {category && <h2 className="text-md font-semibold">Category: <span className="text-md font-bold text-xl"> {category} </span></h2>}
                 {instructorName && <p className="text-md font-semibold">Instructors Name : <span className="text-md font-bold text-xl"> {instructorName} </span></p>}
                 <p className="text-md font-semibold">Available Seats : <span className="text-md font-bold text-xl"> {availableSeats} </span></p>
                 {price && <p className="text-md font-semibold">Hadiya : <span className="text-md font-bold text-xl"> {price} ৳ </span></p>}

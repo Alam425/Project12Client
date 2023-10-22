@@ -15,7 +15,7 @@ const CartItems = ({ i, index }) => {
         setAmount(price);
     }
 
-    const deletecart = id => {
+    const deletecart = _id => {
         Swal.fire({
             title: 'Are you sure?',
             icon: 'warning',
@@ -26,7 +26,7 @@ const CartItems = ({ i, index }) => {
         })
             .then((result) => {
                 if (result.isConfirmed) {
-                    deleteFromCart(_id)
+                    deleteFromCart(_id, name);
                 }
             })
     }
