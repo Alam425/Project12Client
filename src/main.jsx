@@ -72,26 +72,27 @@ const router = createBrowserRouter([
   }, {
     path: '/page',
     element: <Page />,
-    children: [{
-      path: '/page/login',
-      element: <Login />
-    }, {
-      path: '/page/register',
-      element: <Register />
-    }, {
-      path: "/page/tutor/:_id",
-      element: <InstructorDetails />,
-      loader: ({ params }) => fetch(`https://assignment12-h6mv4a5ar-alam425.vercel.app/tutor/${params._id}`)
-    }, {
-      path: "/page/dashboard",
-      element: <Private><Dashboard /></Private>
-    }, {
-      path: "/page/payment",
-      element: <Private><PaymentGateway /></Private>
-    }, {
-      path: "/page/instructors",
-      element: <Instructors></Instructors>
-    }]
+    children: [
+      {
+        path: '/page/login',
+        element: <Login />
+      }, {
+        path: '/page/register',
+        element: <Register />
+      }, {
+        path: "/page/tutor/:_id",
+        element: <InstructorDetails />,
+        loader: ({ params }) => fetch(`https://assignment12-h6mv4a5ar-alam425.vercel.app/tutor/${params._id}`)
+      }, {
+        path: "/page/dashboard",
+        element: <Private><Dashboard /></Private>
+      }, {
+        path: "/page/payment",
+        element: <Private><PaymentGateway /></Private>
+      }, {
+        path: "/page/instructors",
+        element: <Instructors></Instructors>
+      }]
   }, {
     path: "*",
     element: <Error />
